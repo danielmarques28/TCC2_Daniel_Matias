@@ -67,22 +67,15 @@ A execução da ação será a implementação do sistema de recomendação como
 
 \begin{table}[H]
 \centering
+\caption[Escolha de metodologia de pesquisa]{Escolha de metodologia de pesquisa.}
 \setlength{\tabcolsep}{20pt}
 \begin{tabular}{cccc}
 \hline
 \textbf{\begin{tabular}[c]{@{}c@{}}Quanto à\\ abordagem\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Quanto ao\\ objetivo\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Quanto à\\ natureza\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Quanto ao\\ procedimento\end{tabular}} \\ \hline
 \begin{tabular}[c]{@{}c@{}}Pesquisa\\ quantitativa\end{tabular} & \begin{tabular}[c]{@{}c@{}}Pesquisa\\ exploratória\end{tabular} & \begin{tabular}[c]{@{}c@{}}Pesquisa\\ aplicada\end{tabular} & \begin{tabular}[c]{@{}c@{}}Pesquisa bibliográfica\\ e Pesquisa-ação\end{tabular} \\ \hline
 \end{tabular}
-\caption[Escolha de metodologia de pesquisa]{Escolha de metodologia de pesquisa. Fonte: Autor.}
 \label{tab:metodologia_pesquisa}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.9]{figuras/proposta/fluxo_atividade_tcc1.png}
-    \caption[Fluxo de atividades da primeira etapa (TCC1)]{Fluxo de atividades da primeira etapa (TCC1). Fonte: Autor.}
-    \label{fig:fluxo_atividade_tcc1}
-\end{figure}
 
 Cada tarefa do fluxo de atividades do TCC1 (Figura \ref{fig:fluxo_atividade_tcc1}) será sucintamente descrito a seguir:
 
@@ -111,9 +104,9 @@ Cada tarefa do fluxo de atividades do TCC1 (Figura \ref{fig:fluxo_atividade_tcc1
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.8]{figuras/proposta/fluxo_atividade_tcc2.png}
-    \caption[Fluxo de atividades da segunda etapa do projeto (TCC2)]{Fluxo de atividades da segunda etapa do projeto (TCC2). Fonte: Autor.}
-    \label{fig:fluxo_atividade_tcc2}
+    \includegraphics[scale=0.9]{figuras/proposta/fluxo_atividade_tcc1.png}
+    \caption[Fluxo de atividades da primeira etapa (TCC1)]{Fluxo de atividades da primeira etapa (TCC1).}
+    \label{fig:fluxo_atividade_tcc1}
 \end{figure}
 
 Na Figura \ref{fig:fluxo_atividade_tcc2} pode ser visto o fluxo de tarefas para condução do TCC2 e uma breve descrição de cada tarefa, a seguir:
@@ -133,6 +126,13 @@ Na Figura \ref{fig:fluxo_atividade_tcc2} pode ser visto o fluxo de tarefas para 
     
 \end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{figuras/proposta/fluxo_atividade_tcc2.png}
+    \caption[Fluxo de atividades da segunda etapa do projeto (TCC2)]{Fluxo de atividades da segunda etapa do projeto (TCC2).}
+    \label{fig:fluxo_atividade_tcc2}
+\end{figure}
+
 \subsection{Metodologia de desenvolvimento}
 
 Para o presente trabalho foi escolhido como metodologia de desenvolvimento o \textit{Scrum}, metodologia ágil e muito utilizada nos últimos anos pela indústria de desenvolvimento de software, acompanhado com a metodologia Kanban.
@@ -146,7 +146,7 @@ Sua metodologia é baseada na ideia de que muitos processos no desenvolvimento d
 
 Como este trabalho é um software que deve ser entregue com uma alta qualidade esperada pelos superiores da Liva, e deve ser colocado que imprevistos são bem prováveis de acontecer, além de mudanças ao decorrer do trabalho, é necessário empregar um \textit{framework} que atenda a essas características, ou seja, uma metodologia em que seja permitido entregar subconjuntos do projeto a cada período de tempo e que possa ser melhorado no andamento do desenvolvimento junto com um \textit{feedback} contínuo.
 
-O princípio do \textit{Scrum} é entregarprodutos de alta qualidade, após vários períodos de desenvolvimento chamados de \textit{Sprints} (ciclos) que tem duração entre duas e quatro semanas, mas para esse trabalho terá a duração de 2 semanas. Em cada início de um ciclo será realizado uma reunião chamada de \textit{Sprint Planning} (planejamento do ciclo), na qual é feito o planejamento do que será implementado e entregue ao cliente. Da segunda \textit{Sprint} em diante é realizado uma outra reunião chamada de \textit{Sprint Review} (revisão do ciclo) que seria a revisão do ciclo passado com o propósito de rever o que foi feito na \textit{Sprint} antes de realizar o \textit{Sprint Planning} \cite{ijcf94}.
+O princípio do \textit{Scrum} é entregar produtos de alta qualidade, após vários períodos de desenvolvimento chamados de \textit{Sprints} (ciclos) que tem duração entre duas e quatro semanas, mas para esse trabalho terá a duração de 2 semanas. Em cada início de um ciclo será realizado uma reunião chamada de \textit{Sprint Planning} (planejamento do ciclo), na qual é feito o planejamento do que será implementado e entregue ao cliente. Da segunda \textit{Sprint} em diante é realizado uma outra reunião chamada de \textit{Sprint Review} (revisão do ciclo) que seria a revisão do ciclo passado com o propósito de rever o que foi feito na \textit{Sprint} antes de realizar o \textit{Sprint Planning} \cite{ijcf94}.
 
 Como instrumento para organização do que é necessário fazer, será feito o \textit{Product Backlog} (lista de funcionalidade do produto), que é uma lista com todas as funcionalidades que devem conter com base nos requisitos levantados com o cliente. Cada funcionalidade será agrupada pelo seu nível de prioridade. Essa lista é dinâmica e será atualizada de acordo com o andamento do projeto, identificando mais necessidades, como correções e melhorias.
 
@@ -166,12 +166,12 @@ Para realização dessa metodologia será utilizada a ferramenta ZenHub que ser�
 \subsubsection{\textit{Product Backlog} inicial}
 \label{section_product_backlog}
 
-Para obter um conhecimento inicial sobre o projeto, foi levantado as seguintes \textit{features} (características), \textit{user stories} (estórias de usuário) e \textit{technical stories} (estória técnica):
+Para obter um conhecimento inicial sobre o projeto, foram levantado as seguintes \textit{features} (características), \textit{user stories} (estórias de usuário) e \textit{technical stories} (estória técnica):
 
 \begin{itemize}
     \item Características (\textit{Features}):
     \begin{itemize}
-        \item \textbf{FE01 - Recomendador baseado em crítica:} possibilitará o usuário receber recomendações de imóveis baseadas em críticas sobre características de imóveis, feitas pelo próprio usuário;
+        \item \textbf{FE01 - Recomendador baseado em crítica:} possibilitará ao usuário receber recomendações de imóveis baseadas em críticas sobre características de imóveis, feitas pelo próprio usuário;
 
         \item \textbf{FE02 - Recomendador baseado em aprendizado de máquina:} permitirá ao usuário receber recomendações de imóveis baseado nas ações dele no sítio virtual.
     \end{itemize}
@@ -214,7 +214,7 @@ Na atividade "Desenvolver o sistema de recomendação" da Figura \ref{fig:fluxo_
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{figuras/proposta/fluxo_scrum.png}
-    \caption[Fluxo de desenvolvimento do trabalho]{Fluxo de desenvolvimento do trabalho. Fonte: Autor.}
+    \caption[Fluxo de desenvolvimento do trabalho]{Fluxo de desenvolvimento do trabalho.}
     \label{fig:fluxo_scrum}
 \end{figure}
 
@@ -234,10 +234,12 @@ A descrição resumida de cada tarefa se encontra a seguir:
 
 \section{Cronograma}
 
-Foi planejado dois cronogramas para serem seguidos no TCC1 e no TCC2 com intuito de dividir as atividades durante o semestre. O primeiro cronograma é referente a primeira parte do projeto que abrange todas as atividades referentes ao TCC1 e o segundo cronograma é referente as atividades que foram propostas para o TCC2. A utilização do cronograma se faz necessária para ter um gerenciamento de tempo das atividades que precisam ser realizadas para a conclusão deste trabalho.
+Foi planejado dois cronogramas para serem seguidos no TCC1 e no TCC2 com intuito de dividir as atividades durante o semestre. O primeiro cronograma é referente a primeira parte do projeto que abrange todas as atividades referentes ao TCC1 e o segundo cronograma é referente as atividades que foram propostas para o TCC2. A utilização do cronograma se faz necessária para ter um gerenciamento de tempo das atividades que precisam ser realizadas para a conclusão deste trabalho. Pode ser ver nas tabelas a seguir (Tabela \ref{tab:cronograma_tcc1} e Tabela \ref{tab:cronograma_tcc2}) como será organizado as atividades do TCC1 e do TCC2 respectivamente.
 
 \begin{table}[H]
 \centering
+\caption[Cronograma do TCC1]{Cronograma do TCC1.}
+\label{tab:cronograma_tcc1}
 \begin{tabular}{lccccc}
 \hline
 \textbf{} & \textbf{Ago} & \textbf{Set} & \textbf{Ou} & \textbf{Nov} & \textbf{Dez} \\ \hline
@@ -249,28 +251,26 @@ Determinar metodologias &  &  & X &  &  \\ \hline
 Revisar TCC1 &  &  & X & X &  \\ \hline
 Apresentar TCC1 &  &  &  &  & X \\ \hline
 \end{tabular}
-\caption[Cronograma do TCC1]{Cronograma do TCC1. Fonte: Autor.}
 \end{table}
 
 \begin{table}[H]
 \centering
+\caption[Cronograma do TCC2]{Cronograma do TCC2.}
+\label{tab:cronograma_tcc2}
 \begin{tabular}{lccccc}
 \hline
 \textbf{} & \textbf{Mar} & \textbf{Abr} & \textbf{Mai} & \textbf{Jun} & \textbf{Jul} \\ \hline
 Efetuar revisão da banca & X &  &  &  &  \\ \hline
 Desenvolver o sistema de recomendação & X & X & X &  &  \\ \hline
-Implantar sistema de recomendação \\ em ambiente de produção &  &  &  & X &  \\ \hline
-Averiguar resultados obtidos &  &  &  & X & X \\ \hline
-Revisar TCC2 &  &  &  &  & X \\ \hline
-Apresentar TCC2 &  &  &  &  & X \\ \hline
+Implantar sistema de recomendação \\ em ambiente de produção &  &  & X &  &  \\ \hline
+Averiguar resultados obtidos &  & X & X &  & \\ \hline
+Revisar TCC2 &  & X & X &  & \\ \hline
+Apresentar TCC2 &  &  & X &  & \\ \hline
 \end{tabular}
-\caption[Cronograma do TCC2]{Cronograma do TCC2. Fonte: Autor.}
 \end{table}
 
 \section{Sistema de recomendação proposto}
-
-\subsection{Visão geral}
-\label{section_sr_visao_geral}
+\label{section_sr}
 
 O sistema proposto consiste de um novo sistema de recomendação para a plataforma Web Liva.vc. Esse sistema de recomendação seguirá duas abordagens: sistema de recomendação baseado em crítica (seção \ref{Critiquing-based} desse trabalho) e sistema de recomendação baseado em aprendizado de máquina (seção \ref{machineLearning} desse trabalho). Por se tratar do uso de duas abordagens, isso faz com que se torne um sistema de recomendação híbrido (seção \ref{Hybrid} desse trabalho). Para fazer a combinação dessas duas abordagens é utilizada a técnica de hibridação \textit{mixed} (mista), que como já abordado, refere-se a recomendações de diferentes recomendadores que são apresentadas juntas.
 
@@ -304,7 +304,7 @@ Aproveitando-se dessa ferramenta de busca para implementação do sistema de rec
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{figuras/proposta/prototipo_search_profile.png}
-    \caption[Protótipo do filtro de busca]{Protótipo do filtro de busca. Fonte: Autor.}
+    \caption[Protótipo do filtro de busca]{Protótipo do filtro de busca.}
     \label{fig:prototipo_search_profile}
 \end{figure}
 
@@ -315,39 +315,39 @@ A página de detalhes de uma propriedade é acessível por meio de um clique em 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{figuras/proposta/prototipo_critico1.png}
-    \caption[Detalhes do imóvel com menu de crítica parte 1]{Detalhes do imóvel com menu de crítica parte 1. Fonte: Autor.}
+    \caption[Detalhes do imóvel com menu de crítica parte 1]{Detalhes do imóvel com menu de crítica parte 1.}
     \label{fig:prototipo_critico1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{figuras/proposta/prototipo_critico2.png}
-    \caption[Detalhes do imóvel com menu de crítica parte 2]{Detalhes do imóvel com menu de crítica parte 2. Fonte: Autor.}
+    \caption[Detalhes do imóvel com menu de crítica parte 2]{Detalhes do imóvel com menu de crítica parte 2.}
     \label{fig:prototipo_critico2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{figuras/proposta/prototipo_critico3.png}
-    \caption[Detalhes do imóvel com menu de crítica parte 3]{Detalhes do imóvel com menu de crítica parte 3. Fonte: Autor.}
+    \caption[Detalhes do imóvel com menu de crítica parte 3]{Detalhes do imóvel com menu de crítica parte 3.}
     \label{fig:prototipo_critico3}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{figuras/proposta/prototipo_critico4.png}
-    \caption[Detalhes do imóvel com menu de crítica parte 4]{Detalhes do imóvel com menu de crítica parte 4. Fonte: Autor.}
+    \caption[Detalhes do imóvel com menu de crítica parte 4]{Detalhes do imóvel com menu de crítica parte 4.}
     \label{fig:prototipo_critico4}
 \end{figure}
 
 O usuário poderá criticar uma propriedade escolhendo entre manter e mudar os valores para cada característica. Após as críticas serem atribuídas as características de uma propriedade, o perfil de busca desse usuário será aprimorado, gerando novas recomendações no \textit{feed} da página principal.
 
-Ainda referente a página de detalhes, será adicionado também um novo componente na lateral direita para a visualização das recomendações do módulo de aprendizagem de máquina. Esse componente será a representação de cinco propriedades contendo todas suas características principais. Esse componente está representado na Figura \ref{fig:prototipo_recommender_system}.
+Ainda referente à página de detalhes, será adicionado também um novo componente na lateral direita para a visualização das recomendações do módulo de aprendizagem de máquina. Esse componente será a representação de cinco propriedades contendo todas suas características principais. Esse componente está representado na Figura \ref{fig:prototipo_recommender_system}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.53]{figuras/proposta/prototipo_recommender_system.png}
-    \caption[Protótipo do carrossel de recomendações]{Protótipo do carrossel de recomendações. Fonte: Autor.}
+    \caption[Protótipo do carrossel de recomendações]{Protótipo do carrossel de recomendações.}
     \label{fig:prototipo_recommender_system}
 \end{figure}
 
@@ -366,30 +366,30 @@ Considerando o sistema de recomendação como uma caixa preta, a Figura \ref{fig
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figuras/proposta/sr_nivel1.png}
-    \caption[Sistema de recomendação como caixa preta]{Sistema de recomendação como caixa preta. Fonte: Autor.}
+    \caption[Sistema de recomendação como caixa preta]{Sistema de recomendação como caixa preta.}
     \label{fig:sr_nivel1}
 \end{figure}
 
-Para os usuários terem acesso ao ambiente virtual do Liva eles devem, primeiramente, ter interagido com uma outra plataforma de vendas de imóveis tais como Zap Imóveis ou Olx. Essa interação refere-se a um \textit{lead}, que é uma requisição de informações  a um corretor a respeito de um imóvel de uma imobiliária vinculada a Liva. Quando usuários acessam a Liva pela primeira vez eles já possuem um Perfil de Busca pré-configurado advindo de seu primeiro \textit{lead}. Com isso, logo no primeiro acesso à página principal o usuário já tem os dados de entrada necessários para receber recomendações. A partir desse momento dados de navegação relevantes começam a ser registrados, tais como: trocar seu Perfil de Busca, clicar para visualizar propriedades, descartar propriedades, requisitar contato com o corretor (agendar visita ou pedir informações da propriedade) e criticar características das propriedades. Todo novo registro é enviado ao sistema de recomendação, que por sua vez, apresentará novas recomendações. Dessa forma, a cada novo registro as recomendações são reprocessadas e tornam-se eventualmente mais enriquecidas para fornecer outras recomendações ao usuário.
+Para os usuários terem acesso ao ambiente virtual do Liva eles devem, primeiramente, ter interagido com uma outra plataforma de vendas de imóveis tais como Zap Imóveis ou Olx. Essa interação refere-se a um \textit{lead}, que é uma requisição de informações  a um corretor a respeito de um imóvel de uma imobiliária vinculada a Liva. Quando usuários acessam a Liva pela primeira vez eles já possuem diversos dados advindos de seu primeiro \textit{lead}. Com isso, logo no primeiro acesso à página principal o usuário já tem os dados de entrada necessários para receber recomendações. A partir desse momento dados de navegação relevantes começam a ser registrados, tais como: trocar seu Perfil de Busca, clicar para visualizar propriedades, descartar propriedades, requisitar contato com o corretor (agendar visita ou pedir informações da propriedade) e criticar características das propriedades. Todo novo registro é enviado ao sistema de recomendação, que por sua vez, apresentará novas recomendações. Dessa forma, a cada novo registro as recomendações são reprocessadas e tornam-se eventualmente mais enriquecidas para fornecer outras recomendações ao usuário.
 
 O motivo de se criar um sistema de recomendação baseado nos dados do processo de consulta do usuário para encontrar uma propriedade adequada é justificado por eles serem valiosos representantes de sua preferência. Normalmente, um usuário consulta diversas vezes e lê várias páginas antes de encontrar a propriedade certa. Esse processo é considerado muito trabalhoso e pode gerar frustrações aos usuários a ponto de fazê-los desistirem. O foco é melhorar a experiência do usuário no sistema durante esse processo, gerando recomendações ainda mais precisas a cada nova interação.
 
 \subsubsection{Nível 2}
 
-Diminuindo ainda mais o nível de abstração da arquitetura, a Figura \ref{fig:sr_nivel2} apresenta os sistemas existentes, suas tecnologias e interações do projeto.
+Diminuindo ainda mais o nível de abstração da arquitetura, a Figura \ref{fig:sr_nivel2} apresenta os serviços, suas tecnologias e interações do projeto.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figuras/proposta/sr_nivel2.png}
-    \caption[Arquitetura geral do sistema divida em serviços]{Arquitetura geral do sistema divida em serviços. Fonte: Autor.}
+    \caption[Arquitetura geral do sistema divida em serviços]{Arquitetura geral do sistema divida em serviços.}
     \label{fig:sr_nivel2}
 \end{figure}
 
-A arquitetura existente no sistema da Liva segue o estilo Cliente-Servidor, com uma abordagem monolítica. Seu cliente é desenvolvido na linguagem JavaScript e com o \textit{framework} React. Sua API (Application Programming Interface - Interface de Programação de Aplicação) na linguagem Ruby com suporte do \textit{framework} Ruby on Rails, é integrado a um sistema gerenciador de banco de dados PostgreSQL.
+A arquitetura existente no sistema da Liva segue o estilo Cliente-Servidor. Seu cliente é desenvolvido na linguagem JavaScript e com o \textit{framework} React. Em seu \textit{back-end}, Liva API (Application Programming Interface - Interface de Programação de Aplicação) na linguagem Ruby com suporte do \textit{framework} Ruby on Rails, é integrado a um sistema gerenciador de banco de dados PostgreSQL.
 
 A fim de desenvolver um sistema como um serviço que possa ser utilizado pela Liva, sem interferir diretamente em sua estrutura, será implantado uma arquitetura em que o sistema de recomendação a ser implementado é separado do restante do sistema, como demonstrado na Figura \ref{fig:sr_nivel2}, destacado em azul. O sistema é composto por um cliente que é representado pelos novos componentes de interface atribuídos ao \textit{front-end} da Liva. Esses componentes são: nova ferramenta de busca com o componente de importância para cada atributo (Figura \ref{fig:filtro_busca}), componente de crítica (Figura \ref{fig:prototipo_critico1}) e por fim o componente de recomendação, responsável por listar recomendações advindas do módulo de aprendizado de máquina (Figura \ref{fig:prototipo_recommender_system}). Eles se comunicarão através do protocolo HTTP (Protocolo de Transferência de Hipertexto) com a API (Interface de Programação de Aplicações) de recomendação e com a tecnologia Amazon Kinesis, que transmitirá dados para o Redis em tempo real.
 
-A API de recomendação será desenvolvida em Python com o \textit{framework} Django REST e se comunicará com outras três tecnologias: Redis, PostgreSQL e Amazon S3. A escolha dessa tecnologia foi feita pelo fato de que existem diversas bibliotecas e \textit{framework} desenvolvidos em Python que dão suporte para suprir todos os requisitos do sistema a ser desenvolvido, como por exemplo, o XGboost, Scikit-Learn, Numpy, Pandas e o Pickle para solução do módulo de aprendizado de máquina, além do Django REST que possibilita o desenvolvimento de uma API REST.
+A API de recomendação será desenvolvida em Python com o \textit{framework} Django REST e se comunicará com outras três tecnologias: Redis, PostgreSQL e Amazon S3. A escolha dessa tecnologia foi feita pelo fato de que existem diversas bibliotecas e \textit{frameworks}c desenvolvidos em Python que dão suporte para suprir todos os requisitos do sistema a ser desenvolvido, como por exemplo, o XGboost, Scikit-Learn, Numpy, Pandas e o Pickle para solução do módulo de aprendizado de máquina, além do Django REST que possibilita o desenvolvimento de uma API REST.
 
 Como haverá novos componentes na interface gráfica referentes ao sistema de recomendação, eles serão desenvolvidos na linguagem JavaScript com o suporte do \textit{framework} React já utilizado no ambiente da Liva, consequentemente, sendo facilmente integrável.
 
@@ -404,14 +404,14 @@ O sistema de recomendação e todos os serviços que o envolvem serão implantad
 \subsubsection{Nível 3}
 \label{nivel3}
 
-O sistema de recomendação a ser desenvolvido foi dividido em dois módulos. Cada módulo refere-se a um tipo diferente de solução para recomendar itens. Como apresentado anteriormente (seção \ref{section_sr_visao_geral}), o sistema recomendará propriedades para os usuários na página principal do sítio virtual da Liva, no denominado \textit{feed}, baseado na ferramenta de busca, o Perfil de Busca, e as críticas feitas sobre as propriedades pelos usuários. Essa solução refere-se a técnica de crítica de exemplo (\textit{example-critiquing}) como apresentado na seção \ref{Critiquing-based}. A outra solução baseia-se na área de aprendizado de máquina, apresentada na seção \ref{machineLearning}, seguindo o modelo utilizado no site Suumo.jp \cite{Summo:2017}, mas adaptado ao contexto da Liva. Esse módulo diz a respeito das recomendações apresentadas na página de detalhes das propriedades.
+O sistema de recomendação a ser desenvolvido foi dividido em dois módulos. Cada módulo refere-se a um tipo diferente de solução para recomendar itens. Como apresentado anteriormente (seção \ref{section_sr}), o sistema recomendará propriedades para os usuários na página principal do sítio virtual da Liva, no denominado \textit{feed}, baseado na ferramenta de busca, o Perfil de Busca, e as críticas feitas sobre as propriedades pelos usuários. Essa solução refere-se a técnica de crítica de exemplo (\textit{example-critiquing}) como apresentado na seção \ref{Critiquing-based}. A outra solução baseia-se na área de aprendizado de máquina, apresentada na seção \ref{machineLearning}, seguindo o modelo utilizado no site Suumo.jp \cite{Summo:2017}, mas adaptado ao contexto da Liva. Esse módulo diz a respeito das recomendações apresentadas na página de detalhes das propriedades.
 
 \subsection{Sistema de recomendação baseado em Aprendizado de Máquina}
 \label{sr_ml}
 
 A escolha da abordagem de aprendizado de máquina justifica-se pela experiência descrita a seguir, feita na plataforma japonesa Suumo.jp \cite{Summo:2017}, que assim como a Liva, categoriza-se como um ambiente virtual de \textit{e-commerce} imobiliário.
 a
-O motivo de literaturas referentes aos sítios virtuais imobiliários que utilizam esse tipo de abordagem serem escassos acontece por existirem poucas avaliações sobre produtos como propriedades, por pouca recorrência de compra. Li et al. (\citeyear{Summo:2017}) cria um modelo utilizando-se de dados de entrada advindos de registros de consulta dos usuários em tempo real, como por exemplo, clicar/visualizar propriedades e pesquisar por propriedades em diferentes condições, gerando assim, incrementalmente, uma base consistente de dados representativas da preferência dos usuários.
+% O motivo de literaturas referentes aos sítios virtuais imobiliários que utilizam esse tipo de abordagem serem escassos acontece por existirem poucas avaliações sobre produtos como propriedades, por pouca recorrência de compra. Li et al. (\citeyear{Summo:2017}) cria um modelo utilizando-se de dados de entrada advindos de registros de consulta dos usuários em tempo real, como por exemplo, clicar/visualizar propriedades e pesquisar por propriedades em diferentes condições, gerando assim, incrementalmente, uma base consistente de dados representativas da preferência dos usuários.
 
 Li et al. (\citeyear{Summo:2017}) demonstra que para seu contexto os registros de consulta dos usuários como entrada apresenta melhor performance no modelo de aprendizado de máquina quando comparado com outras abordagens. Para fazer essa comparação ele utiliza uma métrica chamada \textit{Conversion Rate} (CVR - Taxa de Conversão). CV ou \textit{Conversion} (Conversão) refere-se a requisição de informação para um corretor de uma propriedade feita por um usuário. O CVR se dá pela quantidade requisições feitas em propriedades recomendadas (A) dividido por todas as recomendações apresentadas (B).
 
@@ -428,7 +428,7 @@ Com a finalidade de demonstrar a arquitetura do módulo de aprendizado de máqui
 \begin{sidewaysfigure}
     \centering
     \includegraphics[scale=0.4]{figuras/proposta/sr_nivel3.png}
-    \caption[Arquitetura do módulo de Aprendizado de Máquina]{Arquitetura do módulo de Aprendizado de Máquina. Fonte: Autor.}
+    \caption[Arquitetura do módulo de Aprendizado de Máquina]{Arquitetura do módulo de Aprendizado de Máquina.}
     \label{fig:sr_nivel3}
 \end{sidewaysfigure}
 
@@ -452,17 +452,18 @@ Em que F é o modelo que atribui um \textit{score} para um registro composto por
 
 A cada nova interação de descarte ou requisição de informação de uma propriedade os dados BU, VU e as características da propriedade em foco são salvos na tabela NEW\_TRAINING\_DATA (Novos Dados de Treinamento). O treino é realizado por lotes agendados diariamente. Toda vez que o \textit{script} de treino é executado, primeiramente, é verificado a existência de um arquivo .csv na Amazon S3 e em seguida é feita uma integração com os dados de treino da tabela. Logo em seguida é realizada a otimização de hiper-parâmetros com a técnica \textit{Grid Search} (pesquisa em grade). O modelo é treinado e salvo como arquivo .sav na Amazon S3.
 
-Toda vez que um usuário alcança a página de detalhes de uma propriedade é recuperado seu BU e VU. Dessa forma, é apurado o \textit{score} para cada candidato PC. Os candidatos são escolhidos baseados na mesma localidade da presente propriedade visualizada pelo usuário. Após realizado o \textit{score} é feita uma ordenação dessas propriedades e em seguida são apresentadas as cinco primeiras ao usuário.
+Toda vez que um usuário alcança a página de detalhes de uma propriedade é recuperado seu BU e VU (Tabela \ref{tab:conjunto_dados}). Dessa forma, é apurado o \textit{score} para cada candidato PC. Os candidatos são escolhidos baseados na mesma localidade da presente propriedade visualizada pelo usuário. Após realizado o \textit{score} é feita uma ordenação dessas propriedades e em seguida são apresentadas as cinco primeiras ao usuário.
 
 \begin{table}[H]
 \centering
+\caption[Exemplo de conjunto de dados de treino]{Exemplo de conjunto de dados de treino.}
+\label{tab:conjunto_dados}
 \begin{tabular}{ccccccc}
 \hline
 \textbf{\begin{tabular}[c]{@{}c@{}}Preço\\ máximo (BU)\end{tabular}} & \textbf{...} & \textbf{\begin{tabular}[c]{@{}c@{}}Quantidade\\ de\\ quartos 1\\ (VU)\end{tabular}} & \textbf{Preço 2 (VU)} & \textbf{\begin{tabular}[c]{@{}c@{}}Quantidade de\\ banheiro 2 (VU)\end{tabular}} & \textbf{...} & \textbf{CV} \\ \hline
 400000 & ... & 1 & 150000 & 2 & ... & 1 \\ \hline
 100000 & ... & 3 & null & null & ... & 0
 \end{tabular}
-\caption[Exemplo de conjunto de dados de treino]{Exemplo de conjunto de dados de treino. Fonte: Autor.}
 \end{table}
 
 Para o presente problema de classificação foi escolhido o modelo de GBDT (\textit{Gradient Boosting Decision Tree} - Árvore de Decisão com Aumento de Gradiente), discutido na seção \ref{ensemble}. Como a característica do conjunto de dados torna possível a existência de colunas com dados ausentes, é muito importante a utilização de um método capaz de lidar com tal problema bem, além de manter uma alta precisão. Por ser um modelo baseado em árvore de decisão, ele consegue lidar bem com atributos em seu valor bruto, o que é preferível em questões de manutenibilidade e performance, pois não necessitará de pré-processamento. Além disso, a tecnologia usada para o modelo lida naturalmente com dados faltantes. Segundo Synced (\citeyear{Synced:2017}), internamente, o XGBoost aprenderá automaticamente qual é a melhor direção a seguir quando um valor estiver faltando. Equivalentemente, isso pode ser visto como "aprender" automaticamente qual é o melhor valor de imputação para valores faltantes com base na minimização da perda do treinamento.
@@ -493,7 +494,7 @@ O usuário segue um processo como demonstrado na Figura \ref{fig:exemple-critiqu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{figuras/proposta/exemple-critiquing.png}
+    \includegraphics[scale=0.5]{figuras/proposta/exemple-critiquing.png}
     \caption[Interação do usuário com a abordagem de crítica de exemplo]{Interação do usuário com a abordagem de crítica de exemplo. Fonte: \cite{Viappiani}. Traduzido.}
     \label{fig:exemple-critiquing}
 \end{figure}
@@ -526,14 +527,14 @@ Na base de dados relacional, serão armazenados dados para backup como o histór
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.40]{figuras/proposta/der.png}
-    \caption[Diagrama de Entidade-Relacionamento (DE-R)]{Diagrama de Entidade-Relacionamento (DE-R). Fonte: Autor.}
+    \caption[Diagrama de Entidade-Relacionamento (DE-R)]{Diagrama de Entidade-Relacionamento (DE-R).}
     \label{fig:der}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.40]{figuras/proposta/diagrama_esquema.png}
-    \caption[Diagrama de Esquemas]{Diagrama de Esquemas. Fonte: Autor.}
+    \caption[Diagrama de Esquemas]{Diagrama de Esquemas.}
     \label{fig:diagrama_esquema}
 \end{figure}
 
@@ -546,7 +547,7 @@ Em relação ao banco de dados no Redis, como já apresentado na arquitetura ant
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figuras/proposta/redis.png}
-    \caption[Representação do banco de dados no Redis]{Representação do banco de dados no Redis. Fonte: Autor.}
+    \caption[Representação do banco de dados no Redis]{Representação do banco de dados no Redis.}
     \label{fig:redis}
 \end{figure}
 
@@ -683,50 +684,37 @@ O  Amazon Simple Storage Service (Amazon S3) é um serviço de armazenamento de 
 
 \subsection{Git}
 
-Git é uma ferramenta de código aberto de controle de versão planejado para pequenos até grandes projetos com rapidez. O seu diferencial comparado a outras ferramentas de versionamento é a sua estrutura de \textit{branches} (ramificações) e \textit{mergings} (fundição), na qual é possível criar várias \textit{branches} locais totalmente independentes uma da outra, além da criação e da exclusão ser fácil e rápida \cite{git:2019}.
+Git é uma ferramenta de código aberto de controle de versão planejado para pequenos até grandes projetos com rapidez. O seu diferencial comparado a outras ferramentas de versionamento é a sua estrutura de \textit{branches} (ramificações) e \textit{mergings} (fundição), na qual é possível criar várias \textit{branches} locais totalmente independentes uma da outra, além da criação e da exclusão ser fácil e rápida \cite{git:2019}. O repositório de código escolhido será o GitHub.
 
 A versão que será usada nos serviços “\textit{Data Updater}” e “Sistema de Recomendação API” será a 2.24.
-
-\subsection{GitHub}
-
-O GitHub é um repositório de código com o controle de versionamento Git. Essa plataforma possibilita que os usuários contribuam em projetos privados ou abertos. Sendo altamente usado no mundo todo  por programadores, tanto para armazenar seus projetos, quanto para divulgar seu portfólio profissional com seus projetos. Também contém ótimos meios de comunicação para relatar dúvidas, erros e requisitar mudanças em algum projeto. Atualmente, o GitHub contém por volta de 100 milhões de repositórios de código hospedado \cite{github:2019}.
 
 \subsection{ZenHub}
 \label{section_zenhub}
 
 ZenHub é uma ferramenta de gerenciamento de projetos ágeis para desenvolvedores de software integrado a plataforma do GitHub. Usando as informações do projeto trazidas do próprio GitHub. Essa ferramenta é capaz de gerar gráficos, relatórios, fluxo de trabalho dos desenvolvedores e andamento do projeto \cite{zenhub:2019}.
 
-\subsection{LáteX}
-
-Látex é um sistema de preparação de documentos para tipografia, sendo mais utilizado em documentos científicos e técnicos, mas podendo ser usado em outros tipos de documento que o usuário deseja publicar. Esse sistema incentiva o autor a se preocupar com o conteúdo do documento e não com sua aparência \cite{latex:2019}.
-
-\subsection{Overleaf}
-
-O Overleaf tem o objetivo de resolver os problemas ao escrever em LáteX, ou seja, torná-lo mais acessível para cientistas e escritores técnicos em todas as etapas. Disponibilizando um visualizador de LáteX que já converte para PDF. Além disso, essa plataforma grava seus documentos em nuvem, tendo assim, mais segurança e permite uso grátis para estudantes \cite{overleaf:2019}.
-
 \section{Simulação}
 
 Com o objetivo de validar a aplicabilidade da proposta, foi desenvolvido um protótipo , com partes disponíveis no Apêndice A deste trabalho. Para o desenvolvimento desse protótipo, como a solução se baseia em duas abordagens diferentes (módulo de critica e módulo de aprendizado de máquina), foi decidido fazer a implementação das duas de forma reduzida e minimalista. De forma geral, para o recomendador baseado em critica foi disponibilizado para o usuário uma pergunta que servirá para criticar apenas uma característica do imóvel, como apresentado nas Figuras \ref{fig:prototipo_simulacao_critica1}, \ref{fig:prototipo_simulacao_critica2} e \ref{fig:prototipo_simulacao_critica3}.
 
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.9]{figuras/consideracoes_finais/prototipo_simulacao_critica1.jpg}
-    \caption[Protótipo da simulação da crítica parte 1]{Protótipo da simulação da crítica parte 1. Fonte: Autor.}
+    \caption[Protótipo da simulação da crítica parte 1]{Protótipo da simulação da crítica parte 1.}
     \label{fig:prototipo_simulacao_critica1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{figuras/consideracoes_finais/prototipo_simulacao_critica2.jpg}
-    \caption[Protótipo da simulação da crítica parte 2]{Protótipo da simulação da crítica parte 2. Fonte: Autor.}
+    \caption[Protótipo da simulação da crítica parte 2]{Protótipo da simulação da crítica parte 2.}
     \label{fig:prototipo_simulacao_critica2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{figuras/consideracoes_finais/prototipo_simulacao_critica3.jpg}
-    \caption[Protótipo da simulação da crítica parte 3]{Protótipo da simulação da crítica parte 3. Fonte: Autor.}
+    \caption[Protótipo da simulação da crítica parte 3]{Protótipo da simulação da crítica parte 3.}
     \label{fig:prototipo_simulacao_critica3}
 \end{figure}
 
@@ -739,7 +727,7 @@ Os dados dos usuários serão atualizados assim como modelo será treinado diari
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{figuras/consideracoes_finais/prototipo_simulacao_rs.jpg}
-    \caption[Protótipo do sistema de recomendação]{Protótipo do sistema de recomendação. Fonte: Autor.}
+    \caption[Protótipo do sistema de recomendação]{Protótipo do sistema de recomendação.}
     \label{fig:prototipo_simulacao_rs}
 \end{figure}
 
@@ -747,9 +735,9 @@ Foram obtidos dados por meio da ferramenta Mixpanel em integração com o \texti
 
 O protótipo ficou em produção do dia 26 ao dia 27 de novembro. Assim o resultado obtido foi comparado com os dois dias da semana anterior (19 e 20 de novembro). Abaixo (Tabela \ref{tab:my-table}) se encontra a representação dos dados obtidos.
 
-
 \begin{table}[H]
 \centering
+\caption[Quantidade de recomendações, imóveis favoritados e descartados]{Quantidade de recomendações, imóveis favoritados e descartados.}
 \begin{tabular}{lcc}
 \hline
 \textbf{Data do inicio - Data do fim} & 19/11/19 - 20/11/19 & 26/11/19 - 27/11/19 \\ \hline
@@ -757,7 +745,6 @@ O protótipo ficou em produção do dia 26 ao dia 27 de novembro. Assim o result
 \textbf{Quantidade de imóveis favoritados} & 0 & 6 \\ \hline
 \textbf{Quantidade de imóveis descartados} & 19 & 7 \\ \hline
 \end{tabular}
-\caption[Quantidade de recomendações, imóveis favoritados e descartados]{Quantidade de recomendações, imóveis favoritados e descartados. Fonte: Autor.}
 \label{tab:my-table}
 \end{table}
 
@@ -777,13 +764,13 @@ Com os dados obtidos foi possível analisar a aprovação das recomendações, m
 
 \begin{table}[H]
 \centering
+\caption[Grau de imóveis favoritados e descartados]{Grau de imóveis favoritados e descartados.}
 \begin{tabular}{lcc}
 \hline
 \textbf{Data do inicio - Data do fim} & 19 /11/19 - 20/11/19 & 26/11/19 - 27/11/19 \\ \hline
 \textbf{Grau de imóveis favoritados} & 0.0 & 1.11 \\ \hline
 \textbf{Grau de imóveis descartados} & 2.65 & 1.30 \\ \hline
 \end{tabular}
-\caption[Grau de imóveis favoritados e descartados]{Grau de imóveis favoritados e descartados. Fonte: Autor.}
 \label{tab:my-table2}
 \end{table}
 
