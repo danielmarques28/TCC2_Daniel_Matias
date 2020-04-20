@@ -21,3 +21,11 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage[font=small, labelfont=bf, justification=centering]{caption}
+
+% ADICIONAR QUADRO
+\usepackage{trivfloat}
+\trivfloat{quadro}
+\addto\captionsbrazil{
+    \renewcommand{\quadroname}{Quadro}
+    \renewcommand{\listquadroname}{Lista de quadros}
+}
