@@ -56,7 +56,7 @@ Cada tarefa do fluxo de atividades do TCC1 (Figura \ref{fig:fluxo_atividade_tcc1
 
     \item \textbf{Estabelecer metodologia de pesquisa:} após o início do estudo do tema selecionado anteriormente, é possível definir quais metodologias de pesquisa serão usadas;
 
-    \item \textbf{Realizar pesquisa bibliográfica:} envolve a pesquisa de artigos, revistas e de trabalhos científicos da mesma área deste trabalho de forma detalhada para servir de fundamento para os objetivos acertados anteriormente;
+    \item \textbf{Pesquisar sobre sistema de recomendação:} envolve a pesquisa de artigos, revistas e de trabalhos científicos sobre sistema de recomendação de forma detalhada para servir de fundamento para os objetivos acertados anteriormente;
 
     \item \textbf{Estabelecer suporte tecnológico:} seleção das tecnologias que serão usadas para o desenvolvimento do trabalho;
 
@@ -162,6 +162,40 @@ Para obter um conhecimento inicial sobre o projeto, foram levantado as seguintes
         \item \textbf{FE02TS01 - Registrar ações do usuário no sítio virtual:} eu, como desenvolvedor, desejo registrar as ações do usuário no site para poder predizer quais são os imóveis mais prováveis da preferência do usuário.
     \end{itemize}
 \end{itemize}
+
+\subsection{Requisitos não funcionais}
+
+Foram selecionados os requisitos não funcionais do sistema de recomendação proposto em categorias. Foram escolhidas as consideradas mais importantes, que são elas: usabilidade, desempenho, segurança, disponibilidade, portabilidade e confiabilidade.
+
+\subsubsection{Usabilidade}
+
+No Sistema de recomendação haverá dois componentes na plataforma \textit{web} Liva. Ambos possuindo um design atrativo para intrigar o usuário ao uso, e também responsivo para poder ser visualizado em qualquer tela, independente do dispositivo ser um computador, \textit{smartphone} ou \textit{tablet}. Deverá ser também intuitivo, contendo ícones para cada atributo do imóvel, instrução de como utilizar, mensagem informativa de sucesso, falha ou redirecionamento de página e botões de aumento e diminuição da quantidade numérica nos campos do formulário.
+
+\subsubsection{Desempenho}
+
+No modulo de Aprendizado de Máquina, devido ao alto volume de dados e processamentos demandados do treino e predição do modelo, na qual é necessário ser processado em menos de 10 segundos para o usuário, são demandadas instancias de servidores adequadas ao contexto. Para isso a instancia a ser escolhida deverá ter os seguintes recursos computacionais:
+
+\begin{itemize}
+    \item 2 Unidades de vCPU
+    \item 8 gigas de memória ram
+    \item 20 gigas de espaço em disco (crescendo horizontalmente se necessário)
+\end{itemize}
+
+\subsubsection{Segurança}
+
+A API do sistema poderá ser acessada por sistemas externos de domínio da Liva. Este acesso deve ser seguro, com autenticação em nível do servidor e em nível da aplicação. Os usuários devem ter conta na plataforma da Liva, para assim, terem acesso as funcionalidades do sistema de recomendação.
+
+\subsubsection{Disponibilidade}
+
+O Sistema de recomendação precisa funcionar 24 x 7 (vinte e quatro horas por dia, sete dias por semana) na operação da Liva, pois há constantemente clientes acessando o sistema. Dessa forma é necessário que a infraestrutura suporte esse período e cressa horizontalmente em seus recursos de acordo com o que é demandado, para assim se manter sempre de pé.
+
+\subsubsection{Portabilidade}
+
+O sistema proposto deverá rodar nos navegadores mais populares, como: Mozilla Firefox, Google Chrome, Microsoft Edge e Opera. Navegadores mais antigos como o Internet Explorer podem sofrer de estabilidade na utilização do site, por não haver suporte com ES5 que é requisito da tecnologia da plataforma.
+
+\subsubsection{Confiabilidade}
+
+O Sistema de recomendação deve ser um sistema eficiente que apresente sempre as recomendações mais adequada possíveis, sendo representantes de seu perfil. Dessa forma o modelo de Aprendizado de Máquina deve apresentar boas métricas de qualidade, e assim apresentar boas recomendações, fazendo os clientes se sentirem com mais confiança em relação ao sistema.
 
 \subsection{Papéis}
 
