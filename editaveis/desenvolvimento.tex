@@ -1,0 +1,119 @@
+\chapter{Desenvolvimento}
+
+Este capítulo refere-se a execução da proposta apresentada no capitulo \ref{proposta}, correspondendo ao fluxo de desenvolvimento indicado em \ref{fluxo_desenvol}. Será abordado como foi o processo de desenvolvimento do sistema de recomendação proposto, assim como as dificuldades e alterações realizadas para sua maior integridade.
+
+Foi divido em trés tópicos principais, um referindo-se ao sistema de recomendação baseado em aprendizado de máquina e o outro ao sistema de recomendação baseado em critica, e por ultimo as uma discussão sobre analises gerais realizadas.
+
+\section{Sistema de recomendação baseado em aprendizado de máquina}
+
+Inicialmente foram criados novos componentes no \textit{front-end} do site da Liva e feitas alterações em outros para se adequarem ao novo sistema de recomendação que irá entrar em execução. Alterações como no design da modal de alteração do perfil de busca e a adição do novo componente de apresentação de imoveis recomendados, além do sistema de comunicação implementado para transmissão de dados de ações dos clientes para API.
+
+O componente de apresentação de imóveis que anteriormente tinha sido colocado na lateral da página de detalhes, atualmente foi colocado de forma a ocupar a largura toda do corpo da página como pode ser visto na figura (\ref{fig:componente_ml}), pois dessa forma o usuário consegue ver várias recomendações ao mesmo tempo, sem precisar ficar clicando mais vezes para ver mais recomendações, o que é o mais ideal para uma melhor acessibilidade. Antes, ele tinha sido colocado na lateral da página de detalhes ao lado do mapa de localização por razão de menor ocupação do espaço da página, como foi apresentado na figura (\ref{fig:prototipo_recommender_system}).
+
+No componente são apresentados 5 novas propriedades para o usuário no total, na qual é possível rolar os \textit{cards} de imóveis com as setas horizontais. Em cada \textit{card} é exibido as seguintes características: imagens da propriedade, preço, tipo de imóvel, cidade em que o imóvel é localizado, quantidade de suítes, quantidade de área e quantidade de vagas de garagem.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.425]{figuras/desenvolvimento/componente_ml.png}
+    \caption[Componente de apresentação de imóveis recomendados]{Componente de apresentação de imóveis recomendados.}
+    \label{fig:componente_ml}
+\end{figure}
+
+Em seguida foi implementado um modelo de aprendizado de máquina simples com XGBoost, sem qualquer análise primária nos hiper parâmetros, com uma base de dados teste e todo o fluxo de recepção e entrega de dados da API, assim como integração com o AWS S3, para serem feitos testes no fluxo completo do novo recomendador.
+
+Logo de inicio, com o sistema já funcionando minimamente, com todos os estudos e testes realizados relacionados a transmissão de dados em tempo real para API, foi notado a não necessidade do uso da ferramenta KINESIS do AWS, pois foi percebido que para transmissão de dados desse tipo, não haveria a necessidade de uma ferramenta tão poderosa. Ela normalmente é utilizada para transmissão de vídeos e outros dados mais pesados, ela consegue capturar continuamente gigabytes de dados por segundo de centenas de milhares de origens \cite{KINESIS:2019}. Dessa forma essa transmissão de dados seria mais adequada com o uso do protocolo via \textit{web socket}. Com isso, foi utilizada a biblioteca \textit{channels} para criar os "consumidores" na API, e a biblioteca "socket.io" para utilização do \textit{socket} no \textit{front-end}. Assim, os dados são enviados em tempo real sem custo adicional de outra ferramenta.
+
+Ao mesmo tempo, aconteceu a implementação do \textit{endpoint} de predição e o \textit{script} de treino do modelo, que houve a necessidade de trazer os dados referente as propriedades, como descrito anteriormente (\ref{nivel2}), que primariamente seriam trazidos do banco da Liva através do serviço DataUpdater. Possibilitado pela tecnologia Django, a conexão com mais de um banco de dado simultaneamente, e sendo direta ao banco de dados da Liva, foi possível fazer buscas rápidas e fáceis das propriedades. Por se tratar apenas de uma tabela, foi decidido descartar o sistema DataUpdater, que traria o empecilho de mais um serviço a ser implementado e mais recursos para mantê-lo.
+
+Desde o inicio do desenvolvimento existia a necessidade de coletar uma base de dados inicial para treinar o modelo e assim tê-lo eficiente com boas recomendações assim que entrasse em produção. Com isso, a ideia inicial era a de implementar uma captura de dados de conversões (CVs), \textit{likes}, \textit{deslikes} e perfis de busca no site da Liva e deixar o tempo o suficiente para obtenção de uma base de dados robusta. Mas, devido a alguns fatores, o fluxo de pessoas no site da liva diminuiu drasticamente, impossibilitando por em prática essa estratégia descrita anteriormente para o surgimento dessa base de dados robusta inicial.
+
+Dessa forma, houve a necessidade de uma nova estratégia para obtenção da base inicial. Após algum tempo analisando possibilidades, foi escolhida um novo plano, que consiste na utilização da base de dados dos \textit{Leads}, adaptado para o modelo proposto.
+
+Como os \textit{Leads} são conversões (CVs) advindos de outras plataformas, eles continuam sendo uma fonte valiosa de dados para o modelo proposto. Dessa forma, o novo plano baseia-se em manipular essa base de dados para se adequar ao modelo. Com a existência de dois tipos de \textit{Leads}, primeiro e segundo contato, há a possibilidade de criar o que seriam os cliques em propriedades do cliente com os \textit{Leads} de segundo contato. O \textit{Lead} de primeiro contato seria o primeiro de um cliente demonstrando interesse em uma propriedade, já o \textit{Lead} de segundo contato são referentes aos \textit{Leads} de clientes já cadastrados, ou seja, a partir da sua segunda interação. O "candidato" ou propriedade convertida, seria a última propriedade de segundo contato. Com a  existência do perfil de busca em cada \textit{Lead}, não houve problema com as \textit{features} iniciais relacionadas ao perfil de busca.
+
+Assim, foi feito um \textit{script} na linguagem Ruby que foi executado no ambiente de produção da Liva, manipulando a base de dados dos \textit{Leads}, incluindo uma "limpeza" nos dados, retirando dados de teste, repopulando campos nulos a partir de contato direto com as imobiliárias, adaptando os dados de classes e adicionando os perfis de busca. Assim, criando uma nova base de dados de conversões positivas, ou seja, com alvo igual a 1 ou CV igual a 1. Como todo modelo que irá classificar a probabilidade de um evento, há a necessidade de dados que representam a "não conversão" de propriedades, e isso a base de dados dos\textit{Leads} não consegue proporcionar.
+
+Com isso, uma estratégia foi escolhida para popular a nova base de dados com "não conversões", ou de alvo 0. Ela consiste em, como igualmente uma estratégia adotada pelo site Summo.jp, a cada uma conversão de alvo 1, dez não conversões, de alvo 0, como descrito em (\ref{design_modelo}). Dessa forma foi possível a geração de uma base de dados inicial com 71000 tuplas aproximadamente.
+
+Com a base de dados inicial obtida, é possível notar um desbalanceamento dos dados, pois existem mais alvos 0 do que 1. Neste caso, o desbalanceamento vem como algo positivo pois na natureza do problema, em que existe uma conversão de um imóvel e outras 10 "não conversões" de outros imóveis para as mesmas \textit{features} relacionadas as pesquisas e interesses do usuário a ideia pode ser generalizada para o caso em que cada usuário tende a apresentar muitos comportamentos semelhantes até algum tipo de ação. O motivo de não ser feito uma base de dados em que uma conversão acontece quando um usuário pede informação e a "não conversão" quando um usuário não pede, é exatamente pelo fato de que muitas vezes o usuário tende a ver imóveis muito parecidos antes de realizar uma ação, ou seja ele pode voltar no imóvel a todo momento \cite{Summo:2017}.
+
+Nesse ponto, com algumas reuniões relacionada ao produto geral da Liva, foi estabelecido que o usuário da plataforma deve selecionar mais de um bairro ou cidade no campo de localidade do perfil de busca, pois isso afeta diretamente em outros produtos da liva. Com isso, foi necessário adaptar o modelo com um perfil de busca com a possibilidade de existir mais de uma localidade, para não afetar o fluxo já existente da Liva.
+
+Utilizando-se de um cálculo de média simples entre a latitude e longitude das possíveis localidades, foi assim solucionado o problema apresentado anteriormente. Essa solução não é a mais ideal, mas devido ao modelo estar com uma dimensão muito alta, 576 colunas, tratar com métodos tradicionais como \textit{one-hot-encoder}, ou até mesmo como foi tratados os "cliques" dos usuários, poderia aumentar ainda mais a dimensão do modelo, podendo trazer diversos problemas.
+
+Agora, com uma base de dados integra, para se obter um melhor estimador possível e testar o modelo com a novo base de treino, foi utilizado a técnica de pesquisa exaustiva sobre valores de parâmetros com \textit{Grid Search}, como especificado no tópico \ref{design_modelo}. Ao mesmo tempo foi utilizado a biblioteca Scikit Learn (\ref{scikit_learn}) para o dimensionamento das \textit{features}.
+
+Obtendo o melhor estimador com a melhor combinação de hiper parâmetros, foi obtido uma acurácia de 98 por cento com o modelo. Com testes manuais, foi possível analisar as recomendações geradas do novo modelo que apresentaram grande coerência.
+
+Com um modelo estável e todo fluxo preparado, foram feitas análises relacionadas ao tempo de resposta das recomendações na página de detalhes. Foi possível observar que o sistema não estava atendendo o requisito de tempo mínimo de espera pelas recomendações descrito no tópico de requisitos não funcionais de desempenho (\ref{desempenho}). Dessa forma, o próximo passo foi focado em encontrar um solução para a minimização do tempo de resposta do sistema.
+
+Reimplementando a manipulação de dados no \textit{endpoint} de predição do modelo, foi possível otimizar bastante o tempo de resposta. Foi trocado todo fluxo de manipulação da matriz de predição por algoritmos de mais baixo nível, além da utilização de \textit{Threads} (processamento em paralelo dos dados). Com isso, de 20 segundos em média esperados do clientes anteriormente, na primeira visita ao site, passaram a ser 2 segundos, e após a primeira visita, juntamente com a integração do redis que irá carregar as propriedades em cache, instantaneamente.
+
+Com o novo sistema de recomendação posto em produção no site da Liva, foram possíveis fazer diversas análises iniciais. Uma delas foi relacionado ao fluxo de pessoas utilizando as recomendações, que estava baixo. Dessa forma veio a decisão de adicionar um componente na lateral da página de detalhes e abaixo do componente de agendar visitas e tirar dúvidas, com o intuito de chamar a atenção do usuário, na qual um botão que se clicado rolará a página de detalhes para a posição do componente de apresentação de imóveis como na figura (\ref{fig:componente_scroll}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{figuras/desenvolvimento/componente_scroll.png}
+    \caption[Componente de encaminhamento]{Componente de encaminhamento.}
+    \label{fig:componente_scroll}
+\end{figure}
+
+Outra análise foi relacionada ao modelo de aprendizado de máquina, em que após alguns testes em um período longo de uso, foi notado que quando o usuário chega a uma quantidade alta de cliques em propriedades, tende muito a recomendação das mesmas propriedades, ou seja, estava ocorrendo um \textit{overfitting}. Dessa forma a solução foi descartar alguns dados que não correspondiam com o "normal", e tinham muito mais interações  que o comum.
+
+Por último, decidimos melhorar o sistema adotado de localização, que como descrito anteriormente, para o perfil de busca que comporta vários bairros ou cidade é tirada a média de sua latitude e longitude. Para melhorar ainda mais a precisão do modelo, foi decidido que ao um usuário clicar em uma propriedade, e a localidade dessa propriedade se encontra em seu perfil de busca, então ela é escolhida para entrada do modelo, dessa forma deixando a localidade mais precisa e condizente com a realidade.
+
+\section{Sistema de recomendação baseado em crítica}
+
+Para o sistema de recomendação baseado em crítica temos primeiramente a construção do componente no \textit{front-end} referente as críticas presente na página de detalhes. Com a sua construção já é possível gerar recomendação, juntamente com o "alterar filtro" no \textit{feed}, mas utilizando da recomendação já existente na Liva citada anteriormente, sem a utilização de técnicas.
+
+Com reuniões na companhia do Product Owner a respeito das regras de negocio da Liva juntamente com o gerente da empresa, foi decidido a não interferência do sistema de recomendação referente ao \textit{feed}, temporariamente, pois o algoritmo de gerar recomendações está sendo utilizado em outro produto da empresa e iria interferir diretamente. Dessa forma, para manter o sistema de recomendação da \textit{startup} e ao mesmo tempo aplicar o novo sistema de recomendação baseado em crítica, foi decido a criação de uma ferramenta de busca em uma nova aba na página principal do sistema como mostrado na seguintes figuras \ref{fig:componente_filtro}, \ref{fig:componente_filtro2}, \ref{fig:componente_filtro3} e \ref{fig:componente_filtro4}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{figuras/desenvolvimento/componente_filtro.png}
+    \caption[Nova aba de busca e o filtro de importância]{Nova aba de busca e o filtro de importância.}
+    \label{fig:componente_filtro}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{figuras/desenvolvimento/componente_filtro2.png}
+    \caption[Filtro de importância ao passar mouse]{Filtro de importância ao passar mouse.}
+    \label{fig:componente_filtro2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{figuras/desenvolvimento/componente_filtro3.png}
+    \caption[Modal de alteração de filtro de busca]{Modal de alteração de filtro de busca.}
+    \label{fig:componente_filtro3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{figuras/desenvolvimento/componente_filtro4.png}
+    \caption[Modal de alteração de filtro de busca - parte 2]{Modal de alteração de filtro de busca - parte 2.}
+    \label{fig:componente_filtro4}
+\end{figure}
+
+Essa ferramenta de busca se baseia no perfil de busca, igualmente como acontece no \textit{feed}, mas o seu algoritmo para buscar e recomendar é como o proposto pelo trabalho, ou seja, aplicando as técnicas recomendações descritas. Um dos motivadores da utilização de uma ferramente de busca, é pelo fator de que, como descrito em (), o sistema de recomendação baseado em critica tem uma melhor performance quando utilizado juntamente com uma ferramenta de busca, ele foi feito para funcionar com tal tipo de ferramenta. O trabalho proposto anteriormente referente a utilização do \textit{feed} para gerar as recomendações, seria uma adaptação a técnica de critica que já utiliza uma ferramenta de busca.
+
+Em seguida, foi feita a implementação de todas as funções de pontuação referentes aos parâmetros do perfil de busca. Para dados quantitativos como quantidade de quartos, suítes e vagas na garagem, foi utilizado uma pontuação tendendo ao valor escolhido, ou seja, há uma pontuação máxima (100) caso o candidato tenha o valor escolhido no perfil de busca, e caso ele tenha diferença positiva, diminui da pontuação gradativamente.
+
+Primeiramente, para calcular a pontuação referente a localização, foi utilizado uma equação linear, onde o valor resultante está entre 0 a 100. A localização da propriedade do candidato com menor distancia ganha a maior pontuação (100) e a maior distancia ganha a menor pontuação (0) e baseado nisso os outros candidatos ganham sua pontuação. Após testes manuais e reuniões, foi notado que esse sistema de pontuação para localidade de imoveis não é adequado, pois existem bairros com diferença econômicas muito grande, ou seja, se tem um bairro colado a um outro, o sistema descrito anteriormente pode recomendar imoveis de um bairro para o outro e eles podem ser muito diferentes. Por esse motivo, foi decidido que esse filtro será estático, onde os candidatos a recomendação estarão somente na localização definida pelo usuário. O tipo do imóvel foi outro filtro escolhido como estático, pois assim como a localização e por se tratar de uma ferramenta de busca, em que o usuário vai experimentando a ferramenta e descobrindo seu alcance, se encaixam mais como estáticos, filtrando somente o tipo que foi selecionado.
+
+Para o preço, assim como anteriormente para a localização, foi feita uma equação linear utilizando-se dos parâmetros mínimo e máximo do perfil de busca, em que o preço de venda do imóvel candidato mais perto do preço mínimo definido no perfil de busca tende ao máximo de pontuação (100). valores fora do mínimo e máximo são considerados de pontuação 0.
+
+Para calcular a pontuação da área, por se tratar de um valor quadrático, tiramos o grau da área do candidato pela areá miníma definida no perfil de busca. Caso o resultado passe de 100, por se tratar de uma área miníma, mantemos o valor de 100 para a pontuação. 
+
+\section{Analises gerais}
+
+% Para alcançar os objetivos descritos na seção \ref{section:objetivos}, que referem-se ao desenvolvimento de um sistema de recomendação, foi realizada inicialmente toda pesquisa bibliográfica necessária, além da realização da documentação referente a arquitetura do projeto, e dessa forma a descrição de como seria todo funcionamento do sistema e seu processo de análise, projeto e desenvolvimento com uma metodologia adequada.
+
+% O objetivo principal desse trabalho é a construção de um sistema de recomendação robusto que funcionará como um serviço mais interessante para o ambiente virtual da Liva.vc, em que possa proporcionar para o usuário uma melhor experiência de uso com recomendações mais coerente com as demandas e preferências de seus usuários.
+
+% Com a realização de implantação de um protótipo implementado para fins de simulação em ambiente da Liva, foi possível, com a análise dos dados coletados durante o experimento, a confirmação da viabilidade parcial de realização do projeto. Como o período do experimento foi pequeno, não foi possível apresentar um espaço amostral maior em que o processo de escolha de um imóvel para compra por um usuário é longo e necessita de muitas interações, o que normalmente leva um tempo maior.
+
+% Para a segunda parte da monografia espera-se, com o desenvolvimento e aplicação do sistema de recomendação em ambiente de produção sítio virtual da Liva, a apresentação de um melhor resultado obtido pela mesma métrica adotada por Li et al. (\citeyear{Summo:2017}). Com ela será possível mensurar melhor a eficiência de um recomendador comparado ao outro previamente atribuído.
+
+% Dessa forma, ao se apresentar melhores resultados iniciais é possível manter a motivação e a expectativa de que o desenvolvimento e implantação do novo sistema de recomendação no modelo híbrido proposto obterá melhores resultados para os usuários do ambiente virtual da Liva.

@@ -172,6 +172,7 @@ Foram selecionados os requisitos não funcionais do sistema de recomendação pr
 No Sistema de recomendação haverá dois componentes na plataforma \textit{web} Liva. Ambos possuindo um design atrativo para intrigar o usuário ao uso, e também responsivo para poder ser visualizado em qualquer tela, independente do dispositivo ser um computador, \textit{smartphone} ou \textit{tablet}. Deverá ser também intuitivo, contendo ícones para cada atributo do imóvel, instrução de como utilizar, mensagem informativa de sucesso, falha ou redirecionamento de página e botões de aumento e diminuição da quantidade numérica nos campos do formulário.
 
 \subsubsection{Desempenho}
+\label{desempenho}
 
 No modulo de Aprendizado de Máquina, devido ao alto volume de dados e processamentos demandados do treino e predição do modelo, na qual é necessário ser processado em menos de 10 segundos para o usuário, são demandadas instancias de servidores adequadas ao contexto. Para isso a instancia a ser escolhida deverá ter os seguintes recursos computacionais:
 
@@ -210,6 +211,7 @@ Quem irá desempenhar esse papel será o professor e orientador, por ser quem va
 \textbf{Time desenvolvimento}. Serão as pessoas que farão a implementação do produto, fazendo entregas a cada \textit{Sprint} \cite{Sutherland}. Esse papel será desempenhado pelos orientandos do trabalho (estudantes envolvidos com o TCC), por possuírem conhecimento técnico sobre as tecnologias, metodologias, além do contexto do trabalho.
 
 \subsection{Fluxo de desenvolvimento}
+\label{fluxo_desenvol}
 
 Na atividade "Desenvolver o sistema de recomendação" da Figura \ref{fig:fluxo_atividade_tcc2}, será realizado o fluxo de desenvolvimento representado a seguir (Figura \ref{fig:fluxo_scrum}).
 
@@ -391,7 +393,7 @@ Para os usuários terem acesso ao ambiente virtual do Liva eles devem, primeiram
 O motivo de se criar um sistema de recomendação baseado nos dados do processo de consulta do usuário para encontrar uma propriedade adequada é justificado por eles serem valiosos representantes de sua preferência. Normalmente, um usuário consulta diversas vezes e lê várias páginas antes de encontrar a propriedade certa. Esse processo é considerado muito trabalhoso e pode gerar frustrações aos usuários a ponto de fazê-los desistirem. O foco é melhorar a experiência do usuário no sistema durante esse processo, gerando recomendações ainda mais precisas a cada nova interação.
 
 \subsubsection{Nível 2}
-
+\label{nivel2}
 Diminuindo ainda mais o nível de abstração da arquitetura, a Figura \ref{fig:sr_nivel2} apresenta os serviços, suas tecnologias e interações do projeto.
 
 \begin{figure}[H]
@@ -438,6 +440,7 @@ Li et al. (\citeyear{Summo:2017}) demonstra que para seu contexto os registros d
 No sítio virtual Suumo.jp, pioneira no uso de sistema de recomendações aplicado ao contexto de imóveis, foi primeiramente desenvolvido um modelo híbrido de filtragem colaborativa com filtragem baseada em conteúdo, descritos na seção \ref{Collaborativefiltering} e \ref{Contentbasedfiltering} respectivamente. Os resultados apresentaram uma melhora de 25\% na taxa de cliques em propriedades em geral. Em seguida, foi implementado um modelo incremental de filtragem colaborativa restrito a algumas páginas para fazer uma comparação com o primeiro modelo. O segundo modelo produziu uma melhoria de 20\% no CVR. O problema desse tipo de abordagem é que, como já apresentado anteriormente (seção \ref{Collaborativefiltering}), para que um item seja recomendado é preciso que muitas interações de usuários sejam feitas, ou seja, muitas visualizações, o que faz com que novas propriedades tenham menos chance de serem recomendadas. O recomendador baseado em aprendizado de máquina proposto ao final apresentou uma melhora de 250\% na performance. Esse resultado demonstra que mesmo as ações mais sutis podem refletir nas preferências de um usuário e têm um efeito positivo na previsão de suas necessidades.
 
 \subsubsection{\textit{Design} do Modelo}
+\label{design_modelo}
 
 Com a finalidade de demonstrar a arquitetura do módulo de aprendizado de máquina e suas principais características, a Figura \ref{fig:sr_nivel3} apresenta o processo de recomendação mais detalhado dentro da API e as interações com as outras tecnologias.
 
@@ -517,7 +520,7 @@ O usuário segue um processo como demonstrado na Figura \ref{fig:exemple-critiqu
 
 Após o usuário ter definido seu modelo de preferência inicial o sistema é capaz de apresentar exemplos que o usuário possa considerar. Esses exemplos são propriedades que são ótimas para a atual busca de preferência (Perfil de Busca) configurada. O usuário irá revisar seu modelo de preferência através de críticas sobre os exemplos apresentados. Quando o usuário identifica o item certo o processo termina.
 
-O usuário irá apresentar suas preferências através do Perfil de Busca como na Figura \ref{fig:filtro_busca}. São comportados os seguintes atributos das propriedades: tipo de imóvel, faixa de preço, área, localização (Cidade e Bairro), quantidade de quartos, quantidade de suítes e quantidade de vagas na garagem. Além disso, usuário seleciona a importância de cada atributo (peso de 1 a 5). O usuário irá criticar as propriedades de acordo com a Figura \ref{fig:prototipo_critico1}, em que ele pode postar críticas para a solução próxima, com as escolhas de manter ou melhorar algum atributo.
+O usuário irá apresentar suas preferências através do Perfil de Busca como na Figura \ref{fig:filtro_busca}. São comportados os seguintes atributos das propriedades: tipo de imóvel, faixa de preço, área, localização (Cidade e Bairro), quantidade de quartos, quantidade de banheiros e quantidade de vagas na garagem. Além disso, usuário seleciona a importância de cada atributo (peso de 1 a 5). O usuário irá criticar as propriedades de acordo com a Figura \ref{fig:prototipo_critico1}, em que ele pode postar críticas para a solução próxima, com as escolhas de manter ou melhorar algum atributo.
 
 Como já demonstrado na seção \ref{Critiquing-based}, o modelo de preferência será baseado no MAUT (teoria da utilidade de atributos múltiplos), em que será computada a utilidade para cada propriedade e assim serem ordenadas e apresentadas.
 
@@ -594,6 +597,7 @@ A respeito dessa ferramenta, ela usa o padrão MV (\textit{Model-View}), pois po
 A versão que será usada para implementação do serviço “Sistema de Recomendação API” será a 3.10.3.
 
 \subsection{Scikit-Learn}
+\label{scikit_learn}
 
 O Scikit-Learn é um módulo do python que possui vários algoritmos de aprendizagem de máquina (por exemplo \textit{random forest e gradient boosting}) para problemas supervisionados e não supervisionados. Está biblioteca é construída em Numpy e Scipy e tem como objetivo trazer conhecimento de aprendizado de máquina para os usuários não especialistas usando uma linguagem de alto nível (Python). Um dos destaques dessa tecnologia está na facilidade de uso, no desempenho e na documentação \cite{PREDEGOSA:2011}.
 
