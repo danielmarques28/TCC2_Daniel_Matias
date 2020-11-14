@@ -1,221 +1,89 @@
 \begin{apendicesenv}
 
 \partapendices \chapter{Simulação}
-\label{apendice}
+\label{apendiceA}
 
-%New colors defined below
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\section{Introdução}
 
-%Code listing style named "mystyle"
-\lstdefinestyle{mystyle}{
-  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
-  keywordstyle=\color{magenta},
-  numberstyle=\tiny\color{codegray},
-  stringstyle=\color{codepurple},
-  basicstyle=\ttfamily\footnotesize,
-  breakatwhitespace=false,         
-  breaklines=true,                 
-  captionpos=b,                    
-  keepspaces=true,                 
-  numbers=left,                    
-  numbersep=5pt,                  
-  showspaces=false,                
-  showstringspaces=false,
-  showtabs=false,                  
-  tabsize=2
-}
+Com o objetivo de validar a aplicabilidade da proposta, foi desenvolvido um protótipo , com partes disponíveis no Apêndice A deste trabalho. Para o desenvolvimento desse protótipo, como a solução se baseia em duas abordagens diferentes (módulo de critica e módulo de aprendizado de máquina), foi decidido fazer a implementação das duas de forma reduzida e minimalista. De forma geral, para o recomendador baseado em critica foi disponibilizado para o usuário uma pergunta que servirá para criticar apenas uma característica do imóvel, como apresentado nas Figuras \ref{fig:prototipo_simulacao_critica1}, \ref{fig:prototipo_simulacao_critica2} e \ref{fig:prototipo_simulacao_critica3}.
 
-%"mystyle" code listing set
-\lstset{style=mystyle}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.9]{figuras/consideracoes_finais/prototipo_simulacao_critica1.jpg}
+    \caption[Protótipo da simulação da crítica parte 1]{Protótipo da simulação da crítica parte 1.}
+    \label{fig:prototipo_simulacao_critica1}
+\end{figure}
 
-\begin{lstlisting}[language=Python, caption=API - NMF Machine Learning Code]
-import numpy as np
-import pandas as pd
-from numpy import genfromtxt
-from sklearn.decomposition import NMF
-from sklearn.preprocessing import OneHotEncoder
-import pickle
-from operator import itemgetter
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{figuras/consideracoes_finais/prototipo_simulacao_critica2.jpg}
+    \caption[Protótipo da simulação da crítica parte 2]{Protótipo da simulação da crítica parte 2.}
+    \label{fig:prototipo_simulacao_critica2}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{figuras/consideracoes_finais/prototipo_simulacao_critica3.jpg}
+    \caption[Protótipo da simulação da crítica parte 3]{Protótipo da simulação da crítica parte 3.}
+    \label{fig:prototipo_simulacao_critica3}
+\end{figure}
 
-def train_model():
-    recommendations = pd.read_csv('./nmf/ML/recommendations.csv',
-                                  names=['search_profile_id',
-                                         'property_id',
-                                         'like/dislike'],
-                                  engine='c',
-                                  low_memory=False)
-    search_profile_ids = recommendations[0:]['search_profile_id'].unique()
+Dessa forma o usuário selecionará uma das características e atribuirá o valor de sua preferência. Em seguida, o perfil de busca do usuário será apropriado com base na crítica dessa característica em si, e assim serão geradas novas recomendações em seu \textit{feed}.
 
-    property_ids = recommendations[0:]['property_id'].unique()
-    property_list_id = pd.DataFrame(data=property_ids, index= None)
-    property_list_id.to_csv(r'./nmf/ML/property_list_id.csv', index=None, header=True)
+No recomendador de aprendizado de máquina foi decidido a construção de uma filtragem colaborativa baseado em modelo, utilizando-se da técnica de fatoração matricial, com o algoritmo de aprendizado de máquina Fatoração matricial não negativa (NMF) disponibilizado pela biblioteca scikit-learn. Para simular a integração do sistema de recomendação como um serviço, foi construída uma API própria para o protótipo. Seu \textit{deploy} foi feito por meio do serviço ECS do AWS, e tem um banco de dados próprio.Os dados de entrada do modelo foram retirados do banco de dados da Liva. Esses dados são referentes as ações de "Favoritar" e "Descartar" um imóvel feitas pelos usuários e foram copiados para o banco de dados da API.
 
-    column_list = []
+Os dados dos usuários serão atualizados assim como modelo será treinado diariamente. A transformação da matriz que terá todos os usuário e todos os imóveis "avaliados", disponibilizará uma pontuação para cada propriedade. Dessa forma será possível recomendar para todos os usuários as cinco melhores propriedades geradas pelo algorítimo. Essas recomendações são apresentadas na página de detalhes do imóvel, assim como na solução proposta, e por meio de um componente carrossel do ReactJS chamado "\textit{swiper}" como na Figura \ref{fig:prototipo_simulacao_rs}.
 
-    for x in property_ids:
-        column_list.append(str(x) + '_like')
-        column_list.append(str(x) + '_dislike')
-        column_list.append(str(x) + '_nan')
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{figuras/consideracoes_finais/prototipo_simulacao_rs.jpg}
+    \caption[Protótipo do sistema de recomendação]{Protótipo do sistema de recomendação.}
+    \label{fig:prototipo_simulacao_rs}
+\end{figure}
 
-    matrix = pd.DataFrame(0, index=search_profile_ids, columns=column_list)
+Foram obtidos dados por meio da ferramenta Mixpanel em integração com o \textit{front-end} da Liva. Esses dados referem-se a consultas realizadas pelo usuário dado um período de tempo. São registradas a frequência de acesso ao \textit{feed}, visualização na pagina de detalhes, edição do perfil de busca, avaliação (favoritar ou descartar) de um imóvel, solicitação de mais imóveis a serem recomendados no \textit{feed}, alteração de ação de favoritar ou descartar imóvel dentre outros. Além disso, foram separados todas as recomendações feitas para os usuários do banco de dados da Liva.
 
-    for x in property_ids:
-        matrix.loc[:,[str(x) + '_nan']] = np.int_(1)
+O protótipo ficou em produção do dia 26 ao dia 27 de novembro. Assim o resultado obtido foi comparado com os dois dias da semana anterior (19 e 20 de novembro). Abaixo (Tabela \ref{tab:my-table}) se encontra a representação dos dados obtidos.
 
-    template = matrix[:1]
-    template.to_csv(r'./nmf/ML/template.csv', index=None, header=True)
+\begin{table}[H]
+\centering
+\caption[Quantidade de recomendações, imóveis favoritados e descartados]{Quantidade de recomendações, imóveis favoritados e descartados.}
+\begin{tabular}{lcc}
+\hline
+\textbf{Data do inicio - Data do fim} & 19/11/19 - 20/11/19 & 26/11/19 - 27/11/19 \\ \hline
+\textbf{Quantidade de recomendações} & 715 & 537 \\ \hline
+\textbf{Quantidade de imóveis favoritados} & 0 & 6 \\ \hline
+\textbf{Quantidade de imóveis descartados} & 19 & 7 \\ \hline
+\end{tabular}
+\label{tab:my-table}
+\end{table}
 
-    for x, row in recommendations.iterrows():
-        search_profile_id = row[0]
-        property_id = row[1]
-        matrix.loc[[search_profile_id],[str(property_id) + '_like']] = row[2]
-        matrix.loc[[search_profile_id],[str(property_id) + '_dislike']] = row[2]*(-1)+1
-        matrix.loc[[search_profile_id],[str(property_id) + '_nan']] = np.int_(0)
+% 421 - recomendações
+% 6 - likes
+% 3 - dislikes
+% 1.42
 
-    matrix.to_csv(r'./nmf/ML/training_matrix.csv', header=True)
+% 1055 - recomendações
+% 10 - likes
+% 12 - dislikes
+% 0.94
 
-    X = matrix
-    model = NMF(n_components=20, init='random', random_state=0)
-    model.fit(X)
-    filename = './nmf/ML/NMF_model.sav'
-    pickle.dump(model, open(filename, 'wb'))
+\subsection{Analise dos resultados}
 
-    print("Treino do modelo finalizado!")
+Com os dados obtidos foi possível analisar a aprovação das recomendações, medindo o grau de imóveis favoritados, dividindo o numero de imóveis recomendados favoritados pelo número total de recomendações multiplicado por 100, além do grau de imoveis descartados com o número de imóveis descartados, como mostrado na tabela \ref{tab:my-table2}.
 
+\begin{table}[H]
+\centering
+\caption[Grau de imóveis favoritados e descartados]{Grau de imóveis favoritados e descartados.}
+\begin{tabular}{lcc}
+\hline
+\textbf{Data do inicio - Data do fim} & 19 /11/19 - 20/11/19 & 26/11/19 - 27/11/19 \\ \hline
+\textbf{Grau de imóveis favoritados} & 0.0 & 1.11 \\ \hline
+\textbf{Grau de imóveis descartados} & 2.65 & 1.30 \\ \hline
+\end{tabular}
+\label{tab:my-table2}
+\end{table}
 
-def generate_recommendations_for_all_users():
-    X = pd.read_csv('./nmf/ML/training_matrix.csv',
-                    engine='c',
-                    low_memory=False)
-    X = X.set_index('Unnamed: 0')
-
-    template = pd.read_csv('./nmf/ML/template.csv',
-                           engine='c',
-                           low_memory=False)
-    model = pickle.load(open('./nmf/ML/NMF_model.sav', 'rb'))
-
-    search_profile_ids = pd.read_csv('./nmf/ML/search_profile_ids.csv',
-                                     names=['search_profile_id'],
-                                     engine='c',
-                                     low_memory=False)
-    i = 0
-    for x, id in search_profile_ids.iterrows():
-        if not id[0] in X.index:
-            i += 1
-            print(i)
-            X = X.append(template.rename(index={0: id[0]}))
-
-    W = model.transform(X)
-    H = model.components_
-
-    matrix_response = pd.DataFrame(data=np.dot(W,H),
-                                   index= X.index,
-                                   columns=X.columns)
-
-    return get_property_ids(matrix_response)
-
-
-def get_property_ids(matrix_response):
-    result = {}
-    for x, row in matrix_response.iterrows():
-        property_id_list = []
-        i = 0
-        while(i != len(matrix_response.columns)):
-            value = row[i]
-            property_id = int(matrix_response.columns[i].replace('_like', ''))
-            property_id_list.append([property_id, value])
-            i += 3
-        result[str(x)] = list(map(lambda x: x[0], sorted(property_id_list, key=itemgetter(1))[-6:-1]))
-    return result
-\end{lstlisting}
-
-\begin{lstlisting}[language=Python, caption=API - views.py]
-from django.shortcuts import render
-from .ML.ml_methods import generate_recommendations_for_all_users, train_model
-from django.http import HttpResponse, JsonResponse
-from .models import Properties, Recommendation
-from django.core.serializers import serialize
-import json
-
-def train_model_and_generate_recommendations(request):
-    train_model()
-    recommendations = generate_recommendations_for_all_users()
-    Recommendation.objects.all().delete()
-    recommendation = Recommendation.objects.create(data=recommendations)
-    return HttpResponse(json.dumps({"success": "Recommendations successfully generated!"}), content_type="application/json")
-
-def get_recommendations(request, search_profile_id):
-    recommendations = Recommendation.objects.first().data
-    properties = recommendations[str(search_profile_id)]
-    response = []
-    for id in properties:
-        property = Properties.objects.get(id=int(id))
-        response.append(property)
-    return HttpResponse(serialize('json', response),  content_type="application/json")
-\end{lstlisting}
-
-\begin{lstlisting}[language=Python, caption=API - models.py]
-from django.db import models
-from django.contrib.postgres.fields import JSONField
-
-class Recommendation(models.Model):
-    data = JSONField()
-
-class Properties(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    description = models.TextField(blank=True, null=True)
-    address = models.CharField(max_length=50, blank=True, null=True)
-    sale_price = models.FloatField(blank=True, null=True)
-    bedrooms = models.IntegerField(blank=True, null=True)
-    suites = models.IntegerField(blank=True, null=True)
-    parking_spots = models.IntegerField(blank=True, null=True)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    property_type = models.CharField(max_length=50, blank=True, null=True)
-    bathrooms = models.IntegerField(blank=True, null=True)
-    state = models.CharField(max_length=50, blank=True, null=True)
-    city_name = models.CharField(max_length=50, blank=True, null=True)
-    postal_code = models.CharField(max_length=50, blank=True, null=True)
-    street_number = models.CharField(max_length=50, blank=True, null=True)
-    administration_fee = models.FloatField(blank=True, null=True)
-    iptu = models.FloatField(blank=True, null=True)
-    images = models.TextField(blank=True, null=True)
-    property_subtype = models.CharField(max_length=50, blank=True, null=True)
-    category = models.CharField(max_length=50, blank=True, null=True)
-    complement = models.CharField(max_length=50, blank=True, null=True)
-    rent_price = models.FloatField(blank=True, null=True)
-    livingrooms = models.IntegerField(blank=True, null=True)
-    elevators = models.IntegerField(blank=True, null=True)
-    units_per_floor = models.IntegerField(blank=True, null=True)
-    floors = models.IntegerField(blank=True, null=True)
-    usable_area = models.IntegerField(blank=True, null=True)
-    total_area = models.IntegerField(blank=True, null=True)
-    accepts_exchange = models.BooleanField(blank=True, null=True)
-    exchange_description = models.TextField(blank=True, null=True)
-    down_payment = models.FloatField(blank=True, null=True)
-    monthly_payment = models.FloatField(blank=True, null=True)
-    offer_type = models.IntegerField(blank=True, null=True)
-    neighborhood_id = models.IntegerField(blank=True, null=True)
-    code = models.CharField(max_length=50, blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
-    title = models.CharField(max_length=50, blank=True, null=True)
-    features_list = models.TextField(blank=True, null=True)
-    condominium_features_list = models.TextField(blank=True, null=True)
-    available = models.BooleanField(blank=True, null=True)
-    square_meter_price = models.FloatField(blank=True, null=True)
-    real_estate_id = models.IntegerField(blank=True, null=True)
-    unavailable_date = models.DateField(blank=True, null=True)
-    reasons = models.TextField(blank=True, null=True)
-    city_id = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'properties'
-\end{lstlisting}
+Apesar do período pequeno da simulação, em virtude do encerramento do prazo para a finalização da primeira etapa (TCC1) e disponibilização para os avaliadores do trabalho, foi possível perceber uma melhora no grau de imoveis favoritados durante este breve período, com a aplicação e comparação dos dois recomendadores com abordagens diferentes, além de apresentar uma menor taxa de descartes.
 
 \end{apendicesenv}

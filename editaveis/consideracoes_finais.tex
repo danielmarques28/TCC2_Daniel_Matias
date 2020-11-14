@@ -1,0 +1,41 @@
+\chapter{Considerações finais}
+
+Esse último capítulo apresenta os resultados atingidos da solução depois do fluxo de desenvolvimento, além da avaliação do mesmo na qual será analisado se o objetivo proposto foi alcançado, sendo possível adicionar outras etapas para um melhoramento do trabalho. Além disso, será mostrado possíveis trabalhos futuros que podem ser feitos a partir do desenvolvimento da solução proposta neste mesmo trabalho.
+
+\section{Conclusão}
+
+Para alcançar os objetivos descritos na seção \ref{section:objetivos}, que referem-se ao desenvolvimento de um sistema de recomendação, foi realizada inicialmente toda pesquisa bibliográfica necessária, além da realização da documentação referente a arquitetura do projeto, e dessa forma a descrição de como seria todo funcionamento do sistema e seu processo de análise, projeto e desenvolvimento com uma metodologia adequada. Algumas mudanças na fase de desenvolvimento foram necessárias como foi descrito no capitulo anterior (\ref{desenvolvimento}), para assim, poder atingir os objetivos e entregar uma melhor qualidade no final do processo.
+
+O objetivo principal desse trabalho foi a construção de um sistema de recomendação que funcionará como um serviço mais interessante para o ambiente virtual da Liva.vc, em que possa proporcionar para o usuário uma melhor experiência de uso com recomendações mais coerente com as demandas e preferências de seus usuários.
+
+Após a fase de desenvolvimento \ref{desenvolvimento}, foi observado que o sistema de recomendação elaborado conseguiu contribuir para agregar um maior valor aos clientes do sistema da Liva, na qual é detalhado no tópico de analise (\ref{analise_gerais}). Esse desenvolvimento foi possível a partir do conhecimento adquirido no curso de Engenharia de Software para realizar cada fase da monografia.
+
+Foi constatado que os objetivos indicados na seção \ref{section:objetivos} foram atingidos no final de todo o processo. Com o módulo baseado em aprendizagem de máquina, para cada usuário, o sistema de recomendação criado ira sugerir imóveis semelhantes com o seu perfil. Para fazer a predição utiliza-se características de imóveis em que o usuário estava navegando e em seu filtro de busca.
+
+O outro módulo do sistema de recomendação implementado é baseado na abordagem de crítica, na qual o usuário poderia "criticar" o imóvel sendo visualizado e utilizar também uma ferramenta de busca de imóveis, onde ele poderia colocar o nível de importância em diferentes atributos de propriedade.
+
+Agora, o usuário ao entrar no sistema da Liva e ver alguma propriedade, poderá ver recomendações de propriedades, assim, facilitando mais sua pesquisa por um imóvel ideal, como foi analisado antecedentemente (\ref{analise_gerais}). A cada imóvel que o usuário navega, melhorará a precisão das sugestões do sistema de recomendação para aquele determinado usuário, e quanto mais usuários utilizarem a ferramenta, melhor a predição será.
+
+\section{Trabalhos futuros}
+
+Como foi falado anteriormente (capítulo \ref{proposta}), esse trabalho tinha como escopo desenvolver um sistema de recomendação híbrido para uma plataforma \textit{e-commerce} da empresa Liva no ramo imobiliário, a fim de melhorar o serviço já utilizado por seus clientes, recomendando imóveis parecidos com o perfil de cada usuário a partir de dois módulos de recomendação desenvolvidos (baseado em crítica e baseado em aprendizado de máquina).
+
+No capítulo antecedente a esse (capítulo \ref{desenvolvimento}), foi detalhado que era necessário realizar alguns modificações na proposta inicial do trabalho para melhor alcançar os objetivos propostos. Ainda assim, é necessário continuar manutenindo a aplicação, sendo essa manutenção feita através de possíveis evoluções (trabalhos futuros) e possíveis correções que será necessário realizar por algum motivo, seja de mudança de regra de negócio ou mudanças nas tecnologias utilizadas no desenvolvimento.
+
+Um dos fundamentos ensinado no curso de Engenharia de Software é pensar na manutenção e evolução da aplicação, em outras palavras, corrigir futuros problemas e desenvolver novas funcionalidades. Pensando nisso, foram levantadas algumas \textit{features} em que aumentariam o valor de negócio do sistema de recomendação proposto, e estas funcionalidades seriam:
+
+\begin{itemize}
+  \item O componente de crítica (figura \ref{fig:componente_critica2}) apresentará dicas de valores para cada descrição do imóvel no componente. Isso seria, por exemplo, apresentar valores de preços alternativos à aquele imóvel sendo visualizado, com base em outros imóveis parecidos naquela mesma localização ou exibir um valor de quarto compatível com aquele preço selecionado.
+
+  \item Detectar e tratar de forma automatizada os casos de usuários com um número muito alto de cliques no modelo, com o propósito de evitar \textit{overfitting} (sobreajuste) no modelo treinado que ocasiona em má predição de novos resultados.
+  
+  \item Foi possível observar uma tendência aos dados de predição com CV = 1 aumentarem mais de acordo com o tempo, isto significa que pode haver um desequilíbrio entre a quantidade de dados com CV = 1 e CV = 0 no futuro. Caso realmente haja, seria possível equilibrar esses dados da mesma forma que foi dito anteriormente no tópico \ref{design_modelo}, na qual para cada uma linha com CV = 1 será gerado 10 linhas com CV = 0.
+\end{itemize}
+
+Além dessas \textit{features} descritas, outras tipos de funcionalidades que também agregariam valor ao sistema são bem-vindas, seja melhorando a usabilidade e experiência do usuário, ou seja ampliando a probabilidade de predição em diferentes tipos de perfis de usuário e suas localidades.
+
+%1 - Algoritmo funcionar para equilibrar os dados de predição de \textit{dislikes} e ficarem 1-10 como feito no \textit{dataset} de \textit{lead}
+
+%2 - Melhor controle nos cliques dos usuários no modelo para não dar \textit{overfitting}
+
+%3 - Apresentação de dicas nos campos de criticas
