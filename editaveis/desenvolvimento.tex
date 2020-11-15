@@ -9,7 +9,7 @@ Foi divido em trés tópicos principais, um referindo-se ao sistema de recomenda
 
 Inicialmente foram criados novos componentes no \textit{front-end} do site da Liva e feitas alterações em outros para se adequarem ao novo sistema de recomendação que irá entrar em execução. Alterações como no design da modal de alteração do perfil de busca e a adição do novo componente de apresentação de imoveis recomendados, além do sistema de comunicação implementado para transmissão de dados de ações dos clientes para API.
 
-O componente de apresentação de imóveis que anteriormente tinha sido colocado na lateral da página de detalhes, atualmente foi colocado de forma a ocupar a largura toda do corpo da página como pode ser visto na figura (\ref{fig:componente_ml}), pois dessa forma o usuário consegue ver várias recomendações ao mesmo tempo, sem precisar ficar clicando mais vezes para ver mais recomendações, o que é o mais ideal para uma melhor acessibilidade. Antes, ele tinha sido colocado na lateral da página de detalhes ao lado do mapa de localização por razão de menor ocupação do espaço da página, como foi apresentado na figura (\ref{fig:prototipo_recommender_system}).
+O componente de apresentação de imóveis que anteriormente tinha sido colocado na lateral da página de detalhes, atualmente foi colocado de forma a ocupar a largura toda do corpo da página como pode ser visto na figura \ref{fig:componente_ml}, pois dessa forma o usuário consegue ver várias recomendações ao mesmo tempo, sem precisar ficar clicando mais vezes para ver mais recomendações, o que é o mais ideal para uma melhor acessibilidade. Antes, ele tinha sido colocado na lateral da página de detalhes ao lado do mapa de localização por razão de menor ocupação do espaço da página, como foi apresentado na figura \ref{fig:prototipo_recommender_system}.
 
 No componente são apresentados 5 novas propriedades para o usuário no total, na qual é possível rolar os \textit{cards} de imóveis com as setas horizontais. Em cada \textit{card} é exibido as seguintes características: imagens da propriedade, preço, tipo de imóvel, cidade em que o imóvel é localizado, quantidade de suítes, quantidade de área e quantidade de vagas de garagem.
 
@@ -50,7 +50,7 @@ Com um modelo estável e todo fluxo preparado, foram feitas análises relacionad
 
 Reimplementando a manipulação de dados no \textit{endpoint} de predição do modelo, foi possível otimizar bastante o tempo de resposta. Foi trocado todo fluxo de manipulação da matriz de predição por algoritmos de mais baixo nível, além da utilização de \textit{Threads} (processamento em paralelo dos dados). Com isso, de 20 segundos em média esperados do clientes anteriormente, na primeira visita ao site, passaram a ser 2 segundos, e após a primeira visita, juntamente com a integração do redis que irá carregar as propriedades em cache, instantaneamente.
 
-Com o novo sistema de recomendação posto em produção no site da Liva, foram possíveis fazer diversas análises iniciais. Uma delas foi relacionado ao fluxo de pessoas utilizando as recomendações, que estava baixo. Dessa forma veio a decisão de adicionar um componente na lateral da página de detalhes e abaixo do componente de agendar visitas e tirar dúvidas, com o intuito de chamar a atenção do usuário, na qual um botão que se clicado rolará a página de detalhes para a posição do componente de apresentação de imóveis como na figura (\ref{fig:componente_scroll}).
+Com o novo sistema de recomendação posto em produção no site da Liva, foram possíveis fazer diversas análises iniciais. Uma delas foi relacionado ao fluxo de pessoas utilizando as recomendações, que estava baixo. Dessa forma veio a decisão de adicionar um componente na lateral da página de detalhes e abaixo do componente de agendar visitas e tirar dúvidas, com o intuito de chamar a atenção do usuário, na qual um botão que se clicado rolará a página de detalhes para a posição do componente de apresentação de imóveis como na figura \ref{fig:componente_scroll}.
 
 \begin{figure}[H]
     \centering
@@ -165,14 +165,14 @@ Comparando os resultados do CVR, é possível notar uma melhora de 11 por cento 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{figuras/desenvolvimento/mixpanel-antes.png}
+    \includegraphics[scale=0.38]{figuras/desenvolvimento/mixpanel-antes.png}
     \caption[Gráfico de conversões durante o novo recomendador]{Gráfico de conversões durante o novo recomendador.}
     \label{fig:mixpanel-antes}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{figuras/desenvolvimento/mixpanel-depois.png}
+    \includegraphics[scale=0.38]{figuras/desenvolvimento/mixpanel-depois.png}
     \caption[Gráfico de conversões antes do novo recomendador]{Gráfico de conversões antes do novo recomendador.}
     \label{fig:mixpanel-depois}
 \end{figure}
