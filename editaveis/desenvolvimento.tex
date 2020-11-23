@@ -3,16 +3,15 @@
 
 Este capítulo refere-se a execução da proposta apresentada no capitulo \ref{proposta}, correspondendo ao fluxo de desenvolvimento indicado na seção \ref{fluxo_desenvol} deste trabalho. Será abordado como foi o processo de desenvolvimento do sistema de recomendação proposto, assim como as dificuldades e alterações realizadas sobre a proposta inicial para sua maior integridade.
 
-% Foi divido em trés tópicos principais, um referindo-se ao sistema de recomendação baseado em aprendizado de máquina e o outro ao sistema de recomendação baseado em crítica, sendo apresentado ao final uma discussão sobre análises gerais realizadas.
+Seguindo a metodologia \textit{Scrum} foi realizado o \textit{backlog} do produto inicial sendo encontrado no apêndice \ref{apendice_backlog_inicial}, contendo as \textit{stories} descritas em \ref{section_product_backlog}, juntamente com as \textit{sprints} e as prioridades de cada \textit{story}.
 
-
-Seguindo a metodologia \textit{Scrum} foi realizado o \textit{backlog} do produto sendo encontrado no apêndice \ref{apendice_backlog}, contendo as \textit{stories} descritas em \ref{section_product_backlog} e as novas que foram criadas no período de desenvolvimento, juntamente com as \textit{sprints} e as prioridades de cada \textit{story}.
-
-%Todas as tarefas descritas em \ref{section_product_backlog} e no \textit{backlog} presente no apêndice \ref{apendice_backlog}, foram executadas no fluxo de desenvolvimento. Houve também adição de novas tarefas durante a execução que foram surgindo nas reuniões de revisão referentes as mudanças no sistemas ou manutenções, que podem ser encontradas também no \textit{backlog}.
+O capítulo foi dividido por \textit{sprints} presentes no \textit{backlog} do produto, sendo apresentado ao final os artefatos gerados e uma breve discussão. No desfecho do capítulo será exibido as análises gerais realizadas no trabalho.
 
 \section{1º \textit{Sprint}}
 
 Na primeira \textit{sprint}, foram criados novos componentes no \textit{front-end} da Liva e feitas alterações nas páginas, inclusive correções de \textit{bugs} para se adequarem ao novo sistema de recomendação que irá entrar em produção após sua conclusão. Alterações como no design da modal de alteração do perfil de busca e a adição do novo componente de apresentação de imoveis recomendados, além do sistema de comunicação implementado para transmissão de dados de ações dos clientes para API.
+
+Também foi realizado a configuração da integração e \textit{deploy} contínuo utilizando a ferramenta Actions do próprio Github, sendo nele realizado a execução dos testes unitários e a execução do \textit{deploy} automático no AWS.
 
 O componente de apresentação de imóveis que anteriormente tinha sido colocado na lateral da página de detalhes, atualmente foi inserido de forma a ocupar a largura toda do corpo da página como pode ser visto na Figura \ref{fig:componente_ml}, pois dessa forma o usuário consegue ver várias recomendações ao mesmo tempo, sem precisar ficar clicando mais vezes para ver recomendações. Antes, ele tinha sido colocado na lateral da página de detalhes, ao lado do mapa de localização, por razão de menor ocupação do espaço da página, como foi apresentado na Figura \ref{fig:prototipo_recommender_system}.
 
@@ -29,7 +28,29 @@ Na implementação do registro das ações dos usuários foi notado que não era
 
 Ao final da \textit{sprint}, na reunião de (\textit{sprint review}) foi decidido que era necessária criar uma nova \textit{story} para substituir a tecnologia KINESIS da AWS.
 
-% SPRINT REVIEW
+\subsection{\textit{Sprint backlog} e resultados}
+
+No quadro \ref{quadro:sprint1} referente a primeira \textit{sprint}, demonstra as \textit{stories} concluídas, pendentes e as novas que surgiram na reunião de \textit{sprint planning}. Para essa \textit{sprint} surgiram as \textit{stories} técnicas TS08 e TS06 pela necessidade da melhora do design dos componentes de perfil de busca e crítica. Também surgiram as \textit{stories} TS12 E TS13, referentes a construção de um CI/CD, que são muito importantes para a manutenção contínua do software.
+
+\begin{quadro}[H]
+\centering
+\caption[\textit{Sprint backlog} e resultados da \textit{sprint} 1]{\textit{Sprint backlog} e resultados da \textit{sprint} 1.}
+\label{quadro:sprint1}
+\begin{tabular}{|p{6cm}|p{2cm}|p{2cm}|p{1cm}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
+US01 - Visualizar perfil de busca & X &  &  \\ \hline
+US02 - Alterar perfil de busca & X &  &  \\ \hline
+TS01 - Corrigir bugs existentes na página de detalhes do imóvel & X &  &  \\ \hline
+TS02 - Corrigir bug de agendamento de visitas & X &  &  \\ \hline
+TS03 - Registrar ações do usuário no sítio virtual &  & X &  \\ \hline
+TS08 - Melhorar design do componente de recomendação & X &  & X \\ \hline
+TS06 - Melhorar design da modal do perfil de busca & X &  & X \\ \hline
+TS07 - Melhorar design do componente de crítica & X &  & X \\ \hline
+TS12 - Configurar integração contínua & X &  & X \\ \hline
+TS13 - Configurar deploy automático & X &  & X \\ \hline
+\end{tabular}
+\end{quadro}
 
 \section{2º \textit{Sprint}}
 
@@ -47,11 +68,26 @@ Como os \textit{Leads} são conversões (CVs) advindos de outras plataformas ele
 
 Assim, foi feito um \textit{script} na linguagem Ruby que foi executado no ambiente de produção da Liva, manipulando a base de dados dos \textit{Leads}, incluindo uma "limpeza" nos dados, retirando dados de teste, repopulando campos nulos a partir de contato direto com as imobiliárias, adaptando os dados de classes e adicionando os perfis de busca. Com isso foi criada uma nova base de dados de conversões positivas, ou seja, com alvo igual a 1 ou CV igual a 1. Como todo modelo que irá classificar a probabilidade de um evento, há a necessidade de dados que representam a "não conversão" de propriedades, e isso a base de dados dos\textit{Leads} não consegue proporcionar.
 
-Por isso uma estratégia foi escolhida para popular a nova base de dados com "não conversões", ou de alvo 0. Ela consiste em, como igualmente uma estratégia adotada pelo site Summo.jp, a cada uma conversão de alvo 1, dez não conversões, de alvo 0, como descrito em (\ref{design_modelo}). Dessa forma foi possível a geração de uma base de dados inicial com 80300 tuplas aproximadamente.
+Por isso uma estratégia foi escolhida para popular a nova base de dados com "não conversões", ou de alvo 0. Ela consiste em, como igualmente uma estratégia adotada pelo \textit{site} Summo.jp, a cada uma conversão de alvo 1, dez não conversões ou de alvo 0 são criadas, como descrito em (\ref{design_modelo}). Dessa forma foi possível a geração de uma base de dados inicial com 80300 tuplas aproximadamente.
 
 Com a base de dados inicial obtida foi possível notar um desbalanceamento dos dados, pois existem mais alvos 0 do que 1. Neste caso, o desbalanceamento vem como algo positivo, pois na natureza do problema, em que existe uma conversão de um imóvel e outras 10 "não conversões" de outros imóveis para as mesmas \textit{features} relacionadas as pesquisas e interesses do usuário a ideia pode ser generalizada para o caso em que cada usuário tende a apresentar muitos comportamentos semelhantes até algum tipo de ação. O motivo de não ser feito uma base de dados em que uma conversão acontece quando um usuário pede informação e a "não conversão" quando um usuário não pede, é exatamente pelo fato de que muitas vezes o usuário tende a ver imóveis muito parecidos antes de realizar uma ação, ou seja ele pode voltar no imóvel a todo momento \cite{Summo:2017}.
 
-% SPRINT REVIEW
+\subsection{\textit{Sprint backlog} e resultados}
+
+Passada a primeira \textit{sprint}, em que foi possível adiantar bastante o sistema, e com o a pendencia criada com a \textit{story} de registro das ações dos usuários foi criada a \textit{story} técnica TS09 para aplicação do Socket TCP. Também surgiu a \textit{story} TS05 que refere-se a criação da nova base de dados, essencial para o prosseguimento do sistema, já que a primeira tentativa da criação da mesma não foi bem sucedida. O quadro \ref{quadro:sprint2} apresenta o \textit{backlog} e resultados da segunda  \textit{sprint}.
+
+\begin{quadro}[H]
+\centering
+\caption[\textit{Sprint backlog} e resultados da \textit{sprint} 2]{\textit{Sprint backlog} e resultados da \textit{sprint} 2.}
+\label{quadro:sprint2}
+\begin{tabular}{|p{6cm}|p{2cm}|p{2cm}|p{1cm}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
+TS09 - Conectar front-end por socket com a API de recomendação & X &  & X \\ \hline
+TS05 - Criar dataset a partir dos leads & X &  & X \\ \hline
+\end{tabular}
+\end{quadro}
+
 
 \section{3º \textit{Sprint}}
 
@@ -69,7 +105,22 @@ Mesmo a obtenção do melhor estimador sendo automatizada, foi feito uma anális
 
 Obtendo o melhor estimador com a melhor combinação de hiper parâmetros foi obtido uma acurácia de 98 por cento com o modelo. Com testes manuais foi possível analisar as recomendações geradas do novo modelo que apresentaram grande coerência. Porém foi notado um grande demora no tempo de resposta nas predições, na qual demorava em média de 15 a 20 segundos cada, e assim foi decidido a criação de uma nova \textit{story} a fim de solucionar esse empecilho.
 
-% SPRINT REVIEW
+\subsection{\textit{Sprint backlog} e resultados}
+
+O foco escolhido para a terceira \textit{sprint} foi em cima da \textit{User Story} 05 que refere-se ao funcionamento por completo do sistema de recomendação baseado em aprendizado de máquina, já que da \textit{sprint} anterior foi possível extrair uma base de dados e assim ser possível montar um modelo eficaz. Na implementação do  \textit{end-point} predição surgiu a \textit{story} técnica TS04, que se refere ao problema de lidar com mais de uma localidade na matriz de predição. O quadro \ref{quadro:sprint3} apresenta o \textit{backlog} e resultados da terceira  \textit{sprint}.
+
+\begin{quadro}[H]
+\centering
+\caption[\textit{Sprint backlog} e resultados da \textit{sprint} 3]{\textit{Sprint backlog} e resultados da \textit{sprint} 3.}
+\label{quadro:sprint3}
+\begin{tabular}{|p{6cm}|p{2cm}|p{2cm}|p{1cm}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
+US05 - Visualizar recomendações na página do imóvel & X &  & \\ \hline
+TS04 - Calcular média de latitude e longitude & X &  & X \\ \hline
+\end{tabular}
+\end{quadro}
+
 
 \section{4º \textit{Sprint}}
 
@@ -135,7 +186,25 @@ Para calcular a pontuação da área, por se tratar de um valor quadrático, foi
 
 Para realizar o \textit{deploy} no AWS, primeiro foi criado um repositório no ECR com o objetivo de armazenar e versionar a imagem do Docker do projeto. Ao mesmo tempo foi criado uma instância (servidor virtual na nuvem) no RDS para comportar o banco de dados Postgres. Com o registro da imagem armazenada, foi possível subir a API através do serviço ECS que ira mantê-lo em uma nova instância descrita em \ref{desempenho}.
 
-% SPRINT REVIEW
+\subsection{\textit{Sprint backlog} e resultados}
+
+Passada a terceira \textit{sprint} em que foi possível fazer testes manuais no recomendador de aprendizado de maquina, foi possível observar e calcular o tempo de resposta do algoritmo de predição que não estava adequado. Com isso para essa \textit{sprint} surgiu a \textit{story} técnica TS10 com o objetivo de aumentar o desempenho da predição. Também é priorizado a US04 e US06 do recomendador de critica com o foco de finalizar o sistema para coloca-lo para coletar dados em produção. No decorrer da \textit{sprint} com uma reunião antes de colocar o sistema em produção, um novo requisito surge para não ferir a regra de negocio da Liva, que é referente a nova ferramenta de busca com as \textit{stories} de usuário US07 e US08.  O quadro \ref{quadro:sprint4} apresenta o \textit{backlog} e resultados da quarta  \textit{sprint}.
+
+\begin{quadro}[H]
+\centering
+\caption[\textit{Sprint backlog} e resultados da \textit{sprint} 4]{\textit{Sprint backlog} e resultados da \textit{sprint} 4.}
+\label{quadro:sprint4}
+\begin{tabular}{|p{6cm}|p{2cm}|p{2cm}|p{1cm}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
+TS10 - Aumentar desempenho na parte de predição & X &  & X \\ \hline
+US04 - Criticar características da propriedade & X &  & \\ \hline
+US06 - Visualizar filtro de importância & X &  & X \\ \hline
+US07 - Alterar filtro de importância & X &  & X \\ \hline
+US08 - Acessar aba de busca no feed & X &  & X \\ \hline
+\end{tabular}
+\end{quadro}
+
 
 \section{5º \textit{Sprint}}
 
@@ -152,14 +221,30 @@ Outra análise foi relacionada ao modelo de aprendizado de máquina, em que apó
 
 Por último, foi determinado melhorar o sistema adotado de localização, que como descrito anteriormente, para o perfil de busca que comporta vários bairros ou cidade é tirada a média de sua latitude e longitude. Para melhorar ainda mais a precisão do modelo foi decidido que um usuário clicar em uma propriedade, e a localidade dessa propriedade se encontra em seu perfil de busca, então ela é escolhida para entrada do modelo, assim deixando a localidade mais precisa e condizente com a realidade.
 
-\section{Analises gerais}
+\subsection{\textit{Sprint backlog} e resultados}
+
+Com o sistema completo em produção, algumas modificações surgiram como necessárias. Primeiramente com a o .O quadro \ref{quadro:sprint5} apresenta o \textit{backlog} e resultados da quinta  \textit{sprint}.
+
+\begin{quadro}[H]
+\centering
+\caption[\textit{Sprint backlog} e resultados da \textit{sprint} 5]{\textit{Sprint backlog} e resultados da \textit{sprint} 5.}
+\label{quadro:sprint5}
+\begin{tabular}{|p{6cm}|p{2cm}|p{2cm}|p{1cm}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
+US09 - Rolar página do imóvel para visualizar recomendações & X &  & X \\ \hline
+TS11 - Limpeza do dataset & X &  & X \\ \hline
+\end{tabular}
+\end{quadro}
+
+\section{Análises gerais}
 \label{analise_gerais}
 
-O novo sistema de recomendação foi colocado em produção por completo, com os dois sistemas de recomendação funcionando, na data de 08/10/2020 e foram coletados dados para serem analisados até a data de 11/11/2020. Neste período foram feitas diversas alterações nos recomendadores, como descrito anteriormente, sempre com o intuito de melhorar-los. Foram feitas mudanças na base de dados inicial, no algoritmo de predição, no design de componentes, nas funções de pontuação e dentre outras alterações importantes.
+O novo sistema de recomendação foi colocado em produção por completo, com os dois sistemas de recomendação funcionando, na data de 08/10/2020 e foram coletados dados para serem analisados até a data de 11/11/2020. Neste período foram feitas diversas alterações nos recomendadores, como descrito anteriormente, sempre com o intuito de melhorá-los. Foram feitas mudanças na base de dados inicial, no algoritmo de predição, no design de componentes, nas funções de pontuação e dentre outras alterações importantes.
 
-Para ser possível a medição das métricas descritas anteriormente em (\ref{metodologia}), além de novas análises, foram coletados dados do período de 03/09/2020 até 08/10/2020, para compara-los com os do período em que o novo sistema de recomendação entrou em produção. Para a coleta desses dados foi utilizada a ferramenta MixPanel, na qual foi utilizada também na simulação (\ref{apendiceA}), além de buscas no banco de dados da Liva.
+Para ser possível a medição das métricas descritas anteriormente em (\ref{metodologia}), além de novas análises, foram coletados dados do período de 03/09/2020 até 08/10/2020, para compara-los com os do período em que o novo sistema de recomendação entrou em produção. Para a coleta desses dados foi utilizada a ferramenta MixPanel, na qual foi utilizada também na simulação (Apêndice \ref{apendiceA}), além de buscas no banco de dados da Liva.
 
-Logo de início, ao buscar dados relacionados a quantidade de conversões positivas e não conversões e suas origens, dos diferentes períodos, temos a seguintes gráficos referentes as imagens \ref{fig:grafico1} e \ref{fig:grafico2}:
+Logo de início, ao buscar dados relacionados a quantidade de conversões positivas e não conversões e suas origens, dos diferentes períodos, temos a seguintes gráficos referentes as Figuras \ref{fig:grafico1} e \ref{fig:grafico2}:
 
 \begin{figure}[H]
     \centering
@@ -175,13 +260,13 @@ Logo de início, ao buscar dados relacionados a quantidade de conversões positi
     \label{fig:grafico2}
 \end{figure}
 
-Comparando as quantidades dentre conversões positivas e não conversões dos diferentes períodos é possível notar, primeiramente, para o período anterior a nova recomendação, uma quantidade muito maior de descartes de imoveis, o que mudou muito para o segundo período, em que as conversões se mantém equilibradas, ou seja, houve uma menor taxa de descartes, pro segundo período, como ocorrido também na simulação no apêndice (\ref{apendiceA}).
+Comparando as quantidades dentre conversões positivas e não conversões dos diferentes períodos é possível notar, primeiramente, para o período anterior a nova recomendação, uma quantidade muito maior de descartes de imoveis, o que mudou muito para o segundo período, em que as conversões se mantém equilibradas, ou seja, houve uma menor taxa de descartes, pro segundo período, como ocorrido também na simulação descrita no Apêndice (\ref{apendiceA}).
 
-Para calcular a métrica de CVR ou conversion rate descrita na seção \ref{metodologia}, coletamos, além das conversões, todos os cliques em recomendações dos usuários, demonstrado na tabela (\ref{tab:my-table3}).
+Para calcular a métrica de CVR ou \textit{conversion rate} descrita na seção \ref{metodologia}, coletamos, além das conversões, todos os cliques em recomendações dos usuários, demonstrados na Tabela (\ref{tab:my-table3}).
 
 \begin{table}[H]
 \centering
-\caption[Conversion Rate]{Conversion Rate.}
+\caption[\textit{conversion rate}]{Conversion Rate.}
 \begin{tabular}{lcc}
 \hline
 \textbf{Data do início - Data do fim} & 03/09/2020 - 08/10/2020 & 08/10/2020 - 11/11/2020 \\ \hline
@@ -192,7 +277,7 @@ Para calcular a métrica de CVR ou conversion rate descrita na seção \ref{meto
 \label{tab:my-table3}
 \end{table}
 
-Comparando os resultados do CVR, é possível notar uma melhora de 11 por cento com a Liva compondo o novo sistema de recomendação proposto. Na tabela \ref{tab:my-table3} é possível também perceber uma grande diminuição na quantidade de cliques, isso pode ser interpretado pelo motivo dos usuários estarem demorando menos tempo para encontrar o imóvel a ser convertido. Dessa forma foi decidido trazer os dados referentes a frequência de usuários diários nos dois períodos.
+Comparando os resultados do CVR é possível notar uma melhora de 11\% com a Liva compondo o novo sistema de recomendação proposto. Na Tabela \ref{tab:my-table3} é possível também perceber uma grande diminuição na quantidade de cliques, isso pode ser interpretado pelo motivo dos usuários estarem demorando menos tempo para encontrar o imóvel a ser convertido. Dessa forma, foi decidido trazer os dados referentes a frequência de usuários diários nos dois períodos.
 
 \begin{figure}[H]
     \centering
