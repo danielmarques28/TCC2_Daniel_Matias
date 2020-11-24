@@ -3,15 +3,22 @@
 
 Este capítulo refere-se a execução da proposta apresentada no capitulo \ref{proposta}, correspondendo ao fluxo de desenvolvimento indicado na seção \ref{fluxo_desenvol} deste trabalho. Será abordado como foi o processo de desenvolvimento do sistema de recomendação proposto, assim como as dificuldades e alterações realizadas sobre a proposta inicial para sua maior integridade.
 
-Seguindo a metodologia \textit{Scrum} foi realizado o \textit{backlog} do produto inicial sendo encontrado no apêndice \ref{apendice_backlog_inicial}, contendo as \textit{stories} descritas em \ref{section_product_backlog}, juntamente com as \textit{sprints} e as prioridades de cada \textit{story}.
+Seguindo a metodologia \textit{Scrum}, foi realizado o \textit{backlog} do produto inicial (encontrado no apêndice \ref{apendice_backlog_inicial}), contendo as \textit{stories} descritas em \ref{section_product_backlog}, juntamente com as \textit{sprints} e as prioridades de cada \textit{story}.
 
 O capítulo foi dividido por \textit{sprints} presentes no \textit{backlog} do produto, sendo apresentado ao final os artefatos gerados e uma breve discussão. No desfecho do capítulo será exibido as análises gerais realizadas no trabalho.
 
 \section{1º \textit{Sprint}}
 
-Na primeira \textit{sprint}, foram criados novos componentes no \textit{front-end} da Liva e feitas alterações nas páginas, inclusive correções de \textit{bugs} para se adequarem ao novo sistema de recomendação que irá entrar em produção após sua conclusão. Alterações como no design da modal de alteração do perfil de busca e a adição do novo componente de apresentação de imoveis recomendados, além do sistema de comunicação implementado para transmissão de dados de ações dos clientes para API.
+Na primeira \textit{sprint}, foram criados novos componentes no \textit{front-end} da Liva e feitas alterações nas páginas, inclusive correções de \textit{bugs} para se adequarem ao novo sistema de recomendação que irá entrar em produção após sua conclusão. Essas alterações são tais como: design da modal de alteração do perfil de busca (Figura \ref{fig:componente_busca}) e a adição do novo componente de apresentação de imoveis recomendados, além do sistema de comunicação implementado para transmissão de dados de ações dos clientes para API.
 
-Também foi realizado a configuração da integração e \textit{deploy} contínuo utilizando a ferramenta Actions do próprio Github, sendo nele realizado a execução dos testes unitários e a execução do \textit{deploy} automático no AWS.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{figuras/desenvolvimento/componente_busca.png}
+    \caption[Modal de alterar filtro de busca]{Modal de alterar filtro de busca.}
+    \label{fig:componente_busca}
+\end{figure}
+
+Também foi realizada a configuração da integração e \textit{deploy} contínuo utilizando a ferramenta Actions do próprio Github, sendo nele realizado a execução dos testes unitários e a execução do \textit{deploy} automático no AWS.
 
 O componente de apresentação de imóveis que anteriormente tinha sido colocado na lateral da página de detalhes, atualmente foi inserido de forma a ocupar a largura toda do corpo da página como pode ser visto na Figura \ref{fig:componente_ml}, pois dessa forma o usuário consegue ver várias recomendações ao mesmo tempo, sem precisar ficar clicando mais vezes para ver recomendações. Antes, ele tinha sido colocado na lateral da página de detalhes, ao lado do mapa de localização, por razão de menor ocupação do espaço da página, como foi apresentado na Figura \ref{fig:prototipo_recommender_system}.
 
@@ -26,11 +33,11 @@ No componente são apresentados 5 novas propriedades para o usuário, no qual é
 
 Na implementação do registro das ações dos usuários foi notado que não era necessário o uso da ferramenta KINESIS do AWS, pois foi percebido que para transmissão de dados desse tipo não havia a necessidade de uma ferramenta tão poderosa. Essa ferramenta do AWS normalmente é utilizada para transmissão de vídeos e outros dados mais pesados, conseguindo capturar continuamente gigabytes de dados por segundo de centenas de milhares de origens \cite{KINESIS:2019}.
 
-Ao final da \textit{sprint}, na reunião de (\textit{sprint review}) foi decidido que era necessária criar uma nova \textit{story} para substituir a tecnologia KINESIS da AWS.
+Ao final da \textit{sprint}, na reunião de \textit{sprint review} foi decidido que era necessário criar uma nova \textit{story} para substituir a tecnologia KINESIS da AWS.
 
 \subsection{\textit{Sprint backlog} e resultados}
 
-No quadro \ref{quadro:sprint1} referente a primeira \textit{sprint}, demonstra as \textit{stories} concluídas, pendentes e as novas que surgiram na reunião de \textit{sprint planning}. Para essa \textit{sprint} surgiram as \textit{stories} técnicas TS08 e TS06 pela necessidade da melhora do design dos componentes de perfil de busca e crítica. Também surgiram as \textit{stories} TS12 E TS13, referentes a construção de um CI/CD, que são muito importantes para a manutenção contínua do software.
+O quadro \ref{quadro:sprint1} referente a primeira \textit{sprint}, demonstra as \textit{stories} concluídas, pendentes e as novas que surgiram na reunião de \textit{sprint planning}. Para essa \textit{sprint} surgiram as \textit{stories} técnicas TS08 e TS06 pela necessidade da melhora do design dos componentes de perfil de busca e crítica. Também surgiram as \textit{stories} TS12 E TS13, referentes a construção de um CI/CD, que são muito importantes para a manutenção contínua do software.
 
 \begin{quadro}[H]
 \centering
@@ -74,7 +81,7 @@ Com a base de dados inicial obtida foi possível notar um desbalanceamento dos d
 
 \subsection{\textit{Sprint backlog} e resultados}
 
-Passada a primeira \textit{sprint}, em que foi possível adiantar bastante o sistema, e com o a pendencia criada com a \textit{story} de registro das ações dos usuários foi criada a \textit{story} técnica TS09 para aplicação do Socket TCP. Também surgiu a \textit{story} TS05 que refere-se a criação da nova base de dados, essencial para o prosseguimento do sistema, já que a primeira tentativa da criação da mesma não foi bem sucedida. O quadro \ref{quadro:sprint2} apresenta o \textit{backlog} e resultados da segunda  \textit{sprint}.
+Passada a primeira \textit{sprint}, em que foi possível adiantar o sistema, e com a pendencia criada com a \textit{story} de registro das ações dos usuários foi criada a \textit{story} técnica TS09 para aplicação do Socket TCP. Da mesma forma surgiu a \textit{story} TS05 que refere-se a criação da nova base de dados, essencial para o prosseguimento do sistema, já que a primeira tentativa da criação da mesma não foi bem sucedida. O quadro \ref{quadro:sprint2} apresenta o \textit{backlog} e resultados da segunda  \textit{sprint}.
 
 \begin{quadro}[H]
 \centering
@@ -83,8 +90,8 @@ Passada a primeira \textit{sprint}, em que foi possível adiantar bastante o sis
 \begin{tabular}{|p{6cm}|p{2cm}|p{2cm}|p{1cm}|}
 \hline
 \multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
-TS09 - Conectar front-end por socket com a API de recomendação & X &  & X \\ \hline
-TS05 - Criar dataset a partir dos leads & X &  & X \\ \hline
+TS09 - Conectar \textit{front-end} por \textit{socket} com a API de recomendação & X &  & X \\ \hline
+TS05 - Criar \textit{dataset} a partir dos \textit{leads} & X &  & X \\ \hline
 \end{tabular}
 \end{quadro}
 
@@ -174,7 +181,7 @@ Com reuniões na companhia do \textit{Product Owner} a respeito das regras de ne
     \label{fig:componente_critica2}
 \end{figure}
 
-Essa ferramenta de busca se baseia no perfil de busca, igualmente como acontece no \textit{feed}, mas o algoritmo utilizado é conforme o proposto nesse trabalho (\ref{exemple-critiquing}), ou seja, aplicando as técnicas de recomendações descritas. Um dos motivadores da utilização de uma ferramente de busca é pelo fator de que, como descrito no tópico \ref{Hybrid}, o sistema de recomendação baseado em crítica tem uma melhor performance quando utilizado juntamente com uma ferramenta de busca, ele foi feito para funcionar com tal tipo de ferramenta. O trabalho proposto anteriormente referente a utilização do \textit{feed} para gerar as recomendações, seria uma adaptação a técnica de crítica que já utiliza uma ferramenta de busca.
+Essa ferramenta de busca se baseia nas características do perfil de busca, igualmente como acontece no algoritmo de recomendação do \textit{feed}, mas difere-se no quesito em que o algoritmo utilizado é conforme o proposto nesse trabalho (\ref{exemple-critiquing}), ou seja, aplicando as técnicas de recomendações descritas. Um dos motivadores da utilização de uma ferramente de busca é pelo fator de que, como descrito no tópico \ref{Hybrid}, o sistema de recomendação baseado em crítica tem uma melhor performance quando utilizado juntamente com uma ferramenta de busca. Essa técnica foi feita para funcionar com tal tipo de ferramenta.
 
 Em seguida, foi feita a implementação de todas as funções de pontuação referentes aos parâmetros do perfil de busca. Para dados quantitativos como quantidade de quartos, suítes e vagas na garagem, foi utilizado uma pontuação tendendo ao valor escolhido, ou seja, há uma pontuação máxima (100) caso o candidato tenha o valor escolhido no perfil de busca, e caso ele tenha diferença positiva, diminui da pontuação gradativamente.
 
@@ -188,7 +195,7 @@ Para realizar o \textit{deploy} no AWS, primeiro foi criado um repositório no E
 
 \subsection{\textit{Sprint backlog} e resultados}
 
-Passada a terceira \textit{sprint} em que foi possível fazer testes manuais no recomendador de aprendizado de maquina, foi possível observar e calcular o tempo de resposta do algoritmo de predição que não estava adequado. Com isso para essa \textit{sprint} surgiu a \textit{story} técnica TS10 com o objetivo de aumentar o desempenho da predição. Também é priorizado a US04 e US06 do recomendador de critica com o foco de finalizar o sistema para coloca-lo para coletar dados em produção. No decorrer da \textit{sprint} com uma reunião antes de colocar o sistema em produção, um novo requisito surge para não ferir a regra de negocio da Liva, que é referente a nova ferramenta de busca com as \textit{stories} de usuário US07 e US08.  O quadro \ref{quadro:sprint4} apresenta o \textit{backlog} e resultados da quarta  \textit{sprint}.
+Passada a terceira \textit{sprint} em que foi possível fazer testes manuais no recomendador de aprendizado de maquina, foi possível observar e calcular o tempo de resposta do algoritmo de predição que não estava adequado. Com isso, para essa \textit{sprint} surgiu a \textit{story} técnica TS10 com o objetivo de aumentar o desempenho da predição. Também é priorizado a US04 e US06 do recomendador de critica com o foco de finalizar o sistema para colocá-lo para coletar dados em produção. No decorrer da \textit{sprint} com uma reunião antes de colocar o sistema em produção, um novo requisito surge para não ferir a regra de negocio da Liva, que é referente a nova ferramenta de busca com as \textit{stories} de usuário US07 e US08.  O quadro \ref{quadro:sprint4} apresenta o \textit{backlog} e resultados da quarta  \textit{sprint}.
 
 \begin{quadro}[H]
 \centering
@@ -223,7 +230,7 @@ Por último, foi determinado melhorar o sistema adotado de localização, que co
 
 \subsection{\textit{Sprint backlog} e resultados}
 
-Com o sistema completo em produção, algumas modificações surgiram como necessárias. Primeiramente com a o .O quadro \ref{quadro:sprint5} apresenta o \textit{backlog} e resultados da quinta  \textit{sprint}.
+Com o sistema completo em produção, algumas modificações surgiram como necessárias. Primeiramente com a observação relacionada ao baixo fluxo de uso do componente de recomendação surge a US09 para implementação o botão para rolar a página. Outra \textit{story} técnica surge (TS11) com a observação da tendencia do recomendador de aprendizado de máquina quando há muitos cliques pelo cliente, demonstrando um  \textit{overfitting}. O quadro \ref{quadro:sprint5} apresenta o \textit{backlog} e resultados da quinta  \textit{sprint}.
 
 \begin{quadro}[H]
 \centering
@@ -233,7 +240,7 @@ Com o sistema completo em produção, algumas modificações surgiram como neces
 \hline
 \multicolumn{1}{|c|}{\textbf{Stories planejadas}} & \multicolumn{1}{c|}{\textbf{Concluídas}} & \multicolumn{1}{c|}{\textbf{Pendentes}} & \multicolumn{1}{c|}{\textbf{Novas}} \\ \hline
 US09 - Rolar página do imóvel para visualizar recomendações & X &  & X \\ \hline
-TS11 - Limpeza do dataset & X &  & X \\ \hline
+TS11 - Limpeza do \textit{dataset} & X &  & X \\ \hline
 \end{tabular}
 \end{quadro}
 
@@ -277,19 +284,19 @@ Para calcular a métrica de CVR ou \textit{conversion rate} descrita na seção 
 \label{tab:my-table3}
 \end{table}
 
-Comparando os resultados do CVR é possível notar uma melhora de 11\% com a Liva compondo o novo sistema de recomendação proposto. Na Tabela \ref{tab:my-table3} é possível também perceber uma grande diminuição na quantidade de cliques, isso pode ser interpretado pelo motivo dos usuários estarem demorando menos tempo para encontrar o imóvel a ser convertido. Dessa forma, foi decidido trazer os dados referentes a frequência de usuários diários nos dois períodos.
+Comparando os resultados do CVR é possível notar uma melhora de 11\% com a Liva compondo o novo sistema de recomendação elaborado. Na Tabela \ref{tab:my-table3} é possível também perceber uma grande diminuição na quantidade de cliques, isso pode ser interpretado pelo motivo dos usuários estarem demorando menos tempo para encontrar o imóvel a ser convertido. Dessa forma, foi decidido trazer os dados referentes a frequência de usuários diários nos dois períodos.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.38]{figuras/desenvolvimento/mixpanel-antes.png}
-    \caption[Gráfico de conversões durante o novo recomendador]{Gráfico de conversões durante o novo recomendador.}
+    \caption[Gráfico de frequência dos usuários durante do novo recomendador]{Gráfico de frequência dos usuários durante do novo recomendador.}
     \label{fig:mixpanel-antes}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.38]{figuras/desenvolvimento/mixpanel-depois.png}
-    \caption[Gráfico de conversões antes do novo recomendador]{Gráfico de conversões antes do novo recomendador.}
+    \caption[Gráfico de frequência dos usuários antes do novo recomendador]{Gráfico de frequência dos usuários antes do novo recomendador.}
     \label{fig:mixpanel-depois}
 \end{figure}
 
