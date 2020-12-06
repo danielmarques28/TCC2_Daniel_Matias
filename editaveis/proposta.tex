@@ -22,9 +22,9 @@ Segundo Thiollent (1997), citado por Costa, Politano e Pereira (\citeyear{Costa}
 
 Para este trabalho foi decidido aplicar como objetivo de pesquisa a categoria exploratória, pois como o conhecimento sobre sistemas de recomendação não eram suficientes a solução do problema apresentado seria necessário adquirir mais conhecimento sobre os devidos conceitos. Assim sendo, houve um empenho maior em realizar pesquisas bibliográficas para achar conteúdos da área e trabalhos semelhantes, podendo ainda ser utilizada dessas pesquisas para explorar ou conhecer novos conteúdos que possam vir a serem necessários \cite{Moretti:2018}.
 
-Para o contexto do presente trabalho foi escolhido a abordagem quantitativa, visto que a ideia principal do mesmo é apresentar resultados de natureza estatística como a métrica CVR (\textit{Conversion Rate}) que será aplicada ao final e abordada mais a frente no trabalho na seção \ref{sr_ml}. Com essa métrica será possível medir o grau de melhoria aplicando-se uma abordagem de recomendação comparado com uma já existente em outro sistema.
+Para o contexto do presente trabalho foi considerado a abordagem quantitativa, visto que a ideia principal do mesmo é apresentar resultados de natureza estatística como a métrica CVR (\textit{Conversion Rate}) que será aplicada ao final e abordada mais a frente no trabalho na seção \ref{sr_ml}. Com essa métrica será possível medir o grau de melhoria aplicando-se uma abordagem de recomendação comparado com uma já existente em outro sistema.
 
-Como o objetivo deste trabalho é desenvolver um produto específico (Sistema de Recomendação) para o cliente e colaborador Liva, sendo necessário também obter mais conhecimento sobre o contexto do problema em questão para elaboração da solução adequada. Assim, foi escolhido para a natureza de pesquisa a categoria aplicada.
+Como o objetivo deste trabalho é desenvolver um produto específico (Sistema de Recomendação) para o cliente e colaborador Liva, sendo necessário também obter mais conhecimento sobre o contexto do problema em questão para elaboração da solução adequada. Assim, foi considerado para a natureza de pesquisa a categoria aplicada.
 
 Para o procedimento de pesquisa foi utilizada a pesquisa bibliográfica no início do trabalho para conhecer os conceitos, abordagens e técnicas empregadas nos Sistema de Recomendação atualmente.
 
@@ -34,7 +34,7 @@ Na fase de diagnóstico foram realizadas reuniões presenciais e remotas com o g
 
 A fase de maior duração foi a de planejamento, pois foi realizado uma extensa pesquisa e coleta de referências bibliográficas sobre os Sistemas de Recomendação, a fim de se decidir quais abordagens são interessantes para o contexto do trabalho, além da pesquisa sobre soluções similares. Com isso foi construído o referencial teórico e efetuado o planejamento da proposta sobre como seria a arquitetura de software (produto), metodologias de pesquisa e de desenvolvimento, levantamento de funcionalidades (requisitos), protótipo de baixa e alta fidelidade e as tecnologias envolvidas.
 
-A execução da ação será a implementação do sistema de recomendação como um serviço a parte dos serviços da \textit{startup} Liva, sendo sintetizadas as definições desse trabalho no quadro \ref{quadro:metodologia_pesquisa}.
+A execução da ação será a implementação do sistema de recomendação como um serviço a parte dos serviços da \textit{startup} Liva, sendo sintetizadas as definições desse trabalho no Quadro \ref{quadro:metodologia_pesquisa}.
 
 \begin{quadro}[h!]
 \centering
@@ -179,7 +179,7 @@ O sistema de recomendação contém dois componentes na plataforma \textit{web} 
 \subsubsection{Desempenho}
 \label{desempenho}
 
-No modulo de Aprendizado de Máquina, devido ao alto volume de dados e processamentos demandados do treino e predição do modelo, na qual é necessário ser processado em menos de 10 segundos para o usuário, são demandadas instâncias de servidores adequadas ao contexto. Para isso, a instância a ser escolhida deverá ter os seguintes recursos computacionais:
+No módulo de Aprendizado de Máquina, devido ao alto volume de dados e processamentos demandados do treino e predição do modelo, na qual é recomendado ser processado em menos de 10 segundos para o usuário que será descrito em \ref{nivel2}, são demandadas instâncias de servidores adequadas ao contexto. Para isso, a instância a ser escolhida deverá ter os seguintes recursos computacionais:
 
 \begin{itemize}
     \item 2 Unidades de vCPU (Unidade central de processamento virtual). Cada vCPU representa um único núcleo físico da CPU pelo sistema operacional da VM;
@@ -197,7 +197,7 @@ O novo sistema de recomendação precisa funcionar vinte e quatro horas por dia,
 
 \subsubsection{Portabilidade}
 
-O sistema proposto deverá rodar nos navegadores mais populares, como: Mozilla Firefox, Google Chrome, Microsoft Edge e Opera. Navegadores mais antigos como o Internet Explorer podem sofrer de estabilidade na utilização do site, por não haver suporte com ES5 que é requisito da tecnologia da plataforma.
+O sistema proposto deverá rodar nos navegadores mais populares, como: Mozilla Firefox, Google Chrome, Microsoft Edge e Opera. Navegadores mais antigos como o Internet Explorer podem apresentar instabilidade na utilização do site, por não haver suporte com ES5 que é requisito da tecnologia da plataforma.
 
 \subsubsection{Confiabilidade}
 
@@ -218,11 +218,11 @@ Quem irá desempenhar esse papel será o professor e orientador, por ser quem va
 \subsection{Fluxo de desenvolvimento}
 \label{fluxo_desenvol}
 
-Na atividade "Desenvolver o sistema de recomendação" da Figura \ref{fig:fluxo_atividade_tcc2} foi realizado o fluxo de desenvolvimento representado a seguir (Figura \ref{fig:fluxo_scrum}).
+Na atividade “Desenvolver o sistema de recomendação'' da Figura \ref{fig:fluxo_atividade_tcc2} foi realizado o fluxo de desenvolvimento representado a seguir (Figura \ref{fig:fluxo_scrum}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{figuras/proposta/fluxo_scrum.png}
+    \includegraphics[scale=0.65]{figuras/proposta/fluxo_scrum.png}
     \caption[Fluxo de desenvolvimento do trabalho]{Fluxo de desenvolvimento do trabalho.}
     \label{fig:fluxo_scrum}
 \end{figure}
@@ -299,7 +299,7 @@ Assim, o sistema proposto estará combinando essas duas abordagens que irão eng
     \label{fig:pagina_detalhes}
 \end{figure}
 
-Na página principal existe uma ferramenta de busca denominada “Perfil de Busca” e pode ser acessada por uma modal, como mostrado na Figura \ref{fig:filtro_busca}.
+Na página principal existe uma ferramenta de busca denominada “Perfil de Busca” e pode ser acessada por uma janela, como mostrado na Figura \ref{fig:filtro_busca}.
 
 \begin{figure}[H]
     \centering
@@ -308,7 +308,7 @@ Na página principal existe uma ferramenta de busca denominada “Perfil de Busc
     \label{fig:filtro_busca}
 \end{figure}
 
-Aproveitando-se dessa ferramenta de busca para implementação do sistema de recomendação baseado em crítica será necessário alguns ajustes. Primeiramente, serão colocados novos campos para determinar a importância de cada característica de preferência do usuário. Além disso, será adicionado um novo campo de quantidade referente a número de banheiros. Os campos que representam a quantidade das características serão alterados para quantidades fixas e não mínimas. A localidade irá se referir somente a um bairro. Essas alterações podem ser vista no protótipo elaborado na Figura \ref{fig:prototipo_search_profile}.
+Aproveitando-se dessa ferramenta de busca para implementação do sistema de recomendação baseado em crítica será necessário alguns ajustes. Primeiramente, serão colocados novos campos para determinar a importância de cada característica de preferência do usuário. Além disso, será adicionado um novo campo de quantidade referente a número de banheiros. Os campos que representam a quantidade das características serão alterados para quantidades fixas e não mínimas. A localidade irá se referir somente a um bairro. Essas alterações podem ser vistas no protótipo elaborado na Figura \ref{fig:prototipo_search_profile}.
 
 \begin{figure}[H]
     \centering
@@ -317,7 +317,7 @@ Aproveitando-se dessa ferramenta de busca para implementação do sistema de rec
     \label{fig:prototipo_search_profile}
 \end{figure}
 
-Ainda na página principal é possível observar a existem de um \textit{feed} (lista com conteúdo atualizado periodicamente), em que se encontram as recomendações do atual recomendador usado pela Liva. Esse \textit{feed} servirá para visualizar as recomendações do novo recomendador baseado em crítica.
+Ainda na página principal é possível observar a existência de um \textit{feed} (lista com conteúdo atualizado periodicamente), em que se encontram as recomendações do atual recomendador usado pela Liva. Esse \textit{feed} servirá para visualizar as recomendações do novo recomendador baseado em crítica.
 
 A página de detalhes de uma propriedade é acessível por meio de um clique em sua imagem no \textit{feed} da página principal. Nela é possível visualizar todas as características da propriedade. Além disso, é possível entrar em contato com o corretor de duas formas diferentes: pedindo mais informações da propriedade e agendando uma visita. Para o recomendador baseado em crítica será atualizado o componente de visualização de características da propriedade para que possam ser feitas críticas pelo usuário sobre essas características disponibilizadas para o acesso. Esse novo componente de crítica pode ser observado pelos protótipos mostrados nas Figuras \ref{fig:prototipo_critico1}, \ref{fig:prototipo_critico2}, \ref{fig:prototipo_critico3} e \ref{fig:prototipo_critico4}, respectivamente.
 
@@ -371,7 +371,7 @@ O recomendador do módulo de aprendizado de máquina tem como dados de entrada r
 
 \subsection{Arquitetura}
 
-Para este trabalho de conclusão de curso foi desenvolvido uma aplicação web como um serviço de sistema de recomendação para o sítio virtual da Liva.vc. Sua principal funcionalidade será fornecer recomendações de propriedades para usuários que sejam clientes de imobiliárias vinculadas a Liva.
+Foi desenvolvido uma aplicação web como um serviço de sistema de recomendação para o sítio virtual da Liva.vc. Sua principal funcionalidade será fornecer recomendações de propriedades para usuários que sejam clientes de imobiliárias vinculadas a Liva.
 
 Para apresentar a arquitetura do projeto houve uma divisão em três níveis, em que são apresentadas as características e os motivos de suas implementações. Começando com o primeiro nível uma visão mais generalizada do sistema é apresentada. Em seguida, serão apresentadas características mais detalhadas nos seguintes níveis, a fim de melhor esclarecer o projeto proposto que se deseja implementar. 
 
@@ -388,7 +388,7 @@ Considerando o sistema de recomendação como uma caixa preta, a Figura \ref{fig
 
 Para os usuários terem acesso ao ambiente virtual do Liva eles devem, primeiramente, ter interagido com uma outra plataforma de vendas de imóveis tais como Zap Imóveis ou Olx. Essa interação refere-se a um \textit{lead}, que é uma requisição de informações  a um corretor a respeito de um imóvel de uma imobiliária vinculada a Liva. Quando usuários acessam a Liva pela primeira vez eles já possuem diversos dados advindos de seu primeiro \textit{lead}. Com isso, logo no primeiro acesso à página principal o usuário já tem os dados de entrada necessários para receber recomendações. A partir desse momento dados de navegação relevantes começam a ser registrados, tais como: trocar seu Perfil de Busca, clicar para visualizar propriedades, descartar propriedades, requisitar contato com o corretor (agendar visita ou pedir informações da propriedade) e criticar características das propriedades. Todo novo registro é enviado ao sistema de recomendação, que por sua vez, apresenta novas recomendações. Dessa forma, a cada novo registro as recomendações são reprocessadas e tornam-se eventualmente mais enriquecidas para fornecer outras recomendações ao usuário.
 
-O motivo de se criar um sistema de recomendação baseado nos dados do processo de consulta do usuário para encontrar uma propriedade adequada é justificado por eles serem valiosos representantes de sua preferência. Normalmente, um usuário consulta diversas vezes e lê várias páginas antes de encontrar a propriedade certa. Esse processo é considerado muito trabalhoso e pode gerar frustrações aos usuários a ponto de fazê-los desistirem. O foco é melhorar a experiência do usuário no sistema durante esse processo, gerando recomendações ainda mais precisas a cada nova interação.
+Normalmente, um usuário consulta diversas vezes e lê várias páginas antes de encontrar a propriedade certa. Esse processo é considerado muito trabalhoso e pode gerar frustrações aos usuários a ponto de fazê-los desistirem. O foco é melhorar a experiência do usuário no sistema durante esse processo, gerando recomendações ainda mais precisas a cada nova interação.
 
 \subsubsection{Nível 2}
 \label{nivel2}
@@ -405,7 +405,7 @@ A arquitetura existente no sistema da Liva segue o estilo Cliente-Servidor. Seu 
 
 A fim de desenvolver um sistema como um serviço que possa ser utilizado pela Liva, sem interferir diretamente em sua estrutura, foi implantado uma arquitetura em que o sistema de recomendação a ser implementado está separado do restante do sistema, como demonstrado na Figura \ref{fig:sr_nivel2}, destacado em azul. O sistema é composto por um cliente que é representado pelos novos componentes de interface atribuídos ao \textit{front-end} da Liva. Esses componentes são: nova ferramenta de busca com o componente de importância para cada atributo (Figura \ref{fig:filtro_busca}), componente de crítica (Figura \ref{fig:prototipo_critico1}) e por fim o componente de recomendação, responsável por listar recomendações advindas do módulo de aprendizado de máquina (Figura \ref{fig:prototipo_recommender_system}). Eles se comunicarão através do protocolo HTTP (Protocolo de Transferência de Hipertexto) com a API (Interface de Programação de Aplicações) de recomendação e com a tecnologia Amazon Kinesis, que transmitirá dados para o Redis em tempo real.
 
-A API de recomendação será desenvolvida em Python com o \textit{framework} Django REST e se comunicará com outras três tecnologias: Redis, PostgreSQL e Amazon S3. 
+A API de recomendação foi desenvolvida em Python com o \textit{framework} Django REST e se comunicará com outras três tecnologias: Redis, PostgreSQL e Amazon S3. 
 
 A escolha dessa tecnologia foi feita pelo fato de que existem diversas bibliotecas e \textit{frameworks} desenvolvidos em Python que dão suporte para suprir todos os requisitos do sistema a ser desenvolvido, como por exemplo, o XGboost, Scikit-Learn, Numpy, Pandas e o Pickle para solução do módulo de aprendizado de máquina, além do Django REST que possibilita o desenvolvimento de uma API REST.
 
@@ -422,13 +422,13 @@ O sistema de recomendação e todos os serviços que o envolvem foram implantado
 \subsubsection{Nível 3}
 \label{nivel3}
 
-O sistema de recomendação a ser desenvolvido foi dividido em dois módulos. Cada módulo refere-se a um tipo diferente de solução para recomendar itens. Como apresentado anteriormente (seção \ref{section_sr}), o sistema recomendará propriedades para os usuários na página principal do sítio virtual da Liva, no denominado \textit{feed}, baseado na ferramenta de busca, o Perfil de Busca, e as críticas feitas sobre as propriedades pelos usuários. Essa solução refere-se a técnica de crítica de exemplo (\textit{example-critiquing}) como apresentado na seção \ref{Critiquing-based}. A outra solução baseia-se na área de aprendizado de máquina, apresentada na seção \ref{machineLearning}, seguindo o modelo utilizado no site Suumo.jp \cite{Summo:2017}, mas adaptado ao contexto da Liva. Esse módulo diz a respeito das recomendações apresentadas na página de detalhes das propriedades.
+% O sistema de recomendação a ser desenvolvido foi dividido em dois módulos. Cada módulo refere-se a um tipo diferente de solução para recomendar itens. Como apresentado anteriormente (seção \ref{section_sr}), o sistema recomendará propriedades para os usuários na página principal do sítio virtual da Liva, no denominado \textit{feed}, baseado na ferramenta de busca, o Perfil de Busca, e as críticas feitas sobre as propriedades pelos usuários. Essa solução refere-se a técnica de crítica de exemplo (\textit{example-critiquing}) como apresentado na seção \ref{Critiquing-based}. A outra solução baseia-se na área de aprendizado de máquina, apresentada na seção \ref{machineLearning}, seguindo o modelo utilizado no site Suumo.jp \cite{Summo:2017}, mas adaptado ao contexto da Liva. Esse módulo diz respeito das recomendações apresentadas na página de detalhes das propriedades.
 
 \subsection{Sistema de recomendação baseado em Aprendizado de Máquina}
 \label{sr_ml}
 
 A escolha da abordagem de aprendizado de máquina justifica-se pela experiência descrita a seguir, feita na plataforma japonesa Suumo.jp \cite{Summo:2017}, que assim como a Liva, categoriza-se como um ambiente virtual de \textit{e-commerce} imobiliário.
-a
+
 % O motivo de literaturas referentes aos sítios virtuais imobiliários que utilizam esse tipo de abordagem serem escassos acontece por existirem poucas avaliações sobre produtos como propriedades, por pouca recorrência de compra. Li et al. (\citeyear{Summo:2017}) cria um modelo utilizando-se de dados de entrada advindos de registros de consulta dos usuários em tempo real, como por exemplo, clicar/visualizar propriedades e pesquisar por propriedades em diferentes condições, gerando assim, incrementalmente, uma base consistente de dados representativas da preferência dos usuários.
 
 Li et al. (\citeyear{Summo:2017}) demonstram que para seu contexto os registros de consulta dos usuários como entrada apresentam melhor performance no modelo de aprendizado de máquina quando comparado com outras abordagens. Para fazer essa comparação foi utilizada uma métrica chamada \textit{Conversion Rate} (CVR - Taxa de Conversão). CV ou \textit{Conversion} (Conversão) refere-se a requisição de informação para um corretor de uma propriedade feita por um usuário. O CVR se dá pela quantidade requisições feitas em propriedades recomendadas (A) dividido por todas as recomendações clicadas (B).
@@ -485,11 +485,11 @@ Toda vez que um usuário alcança a página de detalhes de uma propriedade é re
 \end{tabular}
 \end{table}
 
-Para o presente problema de classificação foi escolhido o modelo de GBDT (\textit{Gradient Boosting Decision Tree} - Árvore de Decisão com Aumento de Gradiente), discutido na seção \ref{ensemble}. Como a característica do conjunto de dados torna possível a existência de colunas com dados ausentes, é muito importante a utilização de um método capaz de lidar com tal problema bem, além de manter uma alta precisão. Por ser um modelo baseado em árvore de decisão, ele consegue lidar com atributos em seu valor bruto, o que é preferível em questões de manutenibilidade e performance, pois não necessitará de pré-processamento. Além disso, a tecnologia usada para o modelo lida naturalmente com dados faltantes. Segundo Synced (\citeyear{Synced:2017}), internamente, o XGBoost aprenderá automaticamente qual é a melhor direção a seguir quando um valor estiver faltando. Equivalentemente, isso pode ser visto como "aprender" automaticamente qual é o melhor valor de imputação para valores faltantes com base na minimização da perda do treinamento.
+Para o presente problema de classificação foi escolhido o modelo de GBDT (\textit{Gradient Boosting Decision Tree} - Árvore de Decisão com Aumento de Gradiente), discutido na seção \ref{ensemble}. Como a característica do conjunto de dados torna possível a existência de colunas com dados ausentes, é muito importante a utilização de um método capaz de lidar com tal problema bem, além de manter uma alta precisão. Por ser um modelo baseado em árvore de decisão, ele consegue lidar com atributos em seu valor bruto, o que é preferível em questões de manutenibilidade e performance, pois não necessitará de pré-processamento. Além disso, a tecnologia usada para o modelo lida naturalmente com dados faltantes. Segundo Synced (\citeyear{Synced:2017}), internamente, o XGBoost aprenderá automaticamente qual é a melhor direção a seguir quando um valor estiver faltando. Equivalentemente, isso pode ser visto como “aprender'' automaticamente qual é o melhor valor de imputação para valores faltantes com base na minimização da perda do treinamento.
 
 Os três tipos de variáveis apresentadas anteriormente para entrada do modelo são relacionadas a dois tipos matemáticos, numéricos e categóricos. Para os dados numéricos como preço ou quantidade de quartos, por exemplo, foi decidido manter seus valores em sua forma bruta, por questões de manutenibilidade e performance. Para as variáveis categóricas, algumas colunas são excluídas, como o identificador único do usuário, que não é útil para a predição. A localidade será trocada pela sua latitude e longitude e o tipo de imóvel será trocado por variáveis fictícias binárias (0 e 1).
 
-No Suumo.jp, Li et al. (\citeyear{Summo:2017}) encontra uma distribuição de tuplas no conjunto de dados de treino entre CV = 1 e CV = 0, para cada uma as linhas com CV = 1 são geradas dez linhas com CV = 0. Em seu modelo é proposto dez linhas CV = 0 para dez propriedades aleatórias a cada um CV = 1. Dado que no modelo proposto para esse projeto se tem a interação de descarte de uma propriedade, foi decidido não utilizar essa proporção e aleatoriedade, pois isso fere com a realidade dos dados dentro do contexto.
+No Suumo.jp, Li et al. (\citeyear{Summo:2017}) encontra uma distribuição de tuplas no conjunto de dados de treino entre CV = 1 e CV = 0, para cada uma as linhas com CV = 1 são geradas dez linhas com CV = 0. Em seu modelo são propostas dez linhas CV = 0 para dez propriedades aleatórias a cada um CV = 1. Dado que no modelo proposto para esse projeto se tem a interação de descarte de uma propriedade, foi decidido não utilizar essa proporção e aleatoriedade, pois isso fere com a realidade dos dados dentro do contexto.
 
 Li et al. (\citeyear{Summo:2017}) afirma que as variáveis categóricas devem ser tratadas em um modelo diferente das variáveis numéricas. Isso porque, como descrito anteriormente na seção \ref{machineLearning}, na construção da árvore de decisão, o algoritmo de ramificação se concentra na divisão de variáveis numéricas, a frequência de aparecimento de variáveis categóricas igualmente importantes para os usuários é relativamente reduzida, ou seja, as árvores de decisão vão favorecer as ramificações com variáveis numéricas.
 
@@ -514,7 +514,7 @@ O usuário segue um processo como demonstrado na Figura \ref{fig:exemple-critiqu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{figuras/proposta/exemple-critiquing.png}
+    \includegraphics[scale=0.65]{figuras/proposta/exemple-critiquing.png}
     \caption[Interação do usuário com a abordagem de crítica de exemplo]{Interação do usuário com a abordagem de crítica de exemplo. Fonte: \cite{Viappiani}. Tradução livre pelos autores.}
     \label{fig:exemple-critiquing}
 \end{figure}
@@ -562,7 +562,7 @@ Inicialmente, a tabela SEARCH\_PROFILE\_HISTORY será populada com base nos perf
 
 A tabela referente ao modelo de aprendizado de máquina será populada com dados que serão coletados do início do primeiro semestre de 2020 até a conclusão do sistema em junho, com o fim de se gerar um conjunto de dados (\textit{dataset}) de treino inicial.
 
-Diante a pandemia que se iniciou em março de 2020 causando o cancelamento do primeiro semestre, adiando o calendário acadêmico da UnB, foi alterado a estratégia para a população da tabela referente ao modelo e aprendizado de máquina descrito acima, que se encontra especificado na seção (\ref{sprint2}).
+Diante a pandemia que se iniciou em março de 2020 causando o cancelamento do primeiro semestre, adiando o calendário acadêmico da UnB, foi alterada a estratégia para a população da tabela referente ao modelo e aprendizado de máquina descrito acima, que se encontra especificado na seção (\ref{sprint2}).
 
 Em relação ao banco de dados no Redis, como já apresentado na arquitetura anteriormente, existem quatro entidades como mostrado na Figura \ref{fig:redis}.
 
